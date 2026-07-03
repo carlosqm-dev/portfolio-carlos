@@ -5,13 +5,14 @@
  * En mobile el nav colapsa a hamburguesa y el pill de marca queda visible.
  *
  * Contratos reutilizados (no reinventar):
- *  - Toggle idioma: atributo `data-lang-toggle` (src/scripts/lang-toggle.ts).
+ *  - Toggle idioma: `LangToggle` (components/ui/LangToggle.astro) +
+ *    atributo `data-lang-toggle-root` (src/scripts/lang-toggle.ts).
  *  - Hamburguesa: `data-hamburger` + `aria-controls` → `[data-mobile-menu]`
  *    con `data-open` (src/scripts/hamburger.ts).
  */
 import { getEntry } from 'astro:content';
-import T from '@/components/ui/T.astro';
 import Icon from '@/components/ui/Icon.astro';
+import LangToggle from '@/components/ui/LangToggle.astro';
 import NavLinks from './NavLinks.astro';
 
 type Localized = { es: string; en: string };
@@ -20,7 +21,7 @@ const hero = await getEntry('ui', 'hero');
 // La colección `ui` tiene shape abierto (ADR-002); tipamos lo que consumimos.
 const { brand, langToggle, nav } = hero.data as {
   brand: string;
-  langToggle: string;
+  langToggle: { es: string; en: string };
   nav: { href: string; label: Localized }[];
 };
 
@@ -50,14 +51,10 @@ const pill = 'rounded-2xl border border-border bg-surface/80 backdrop-blur';
     </nav>
 
     <div class="flex items-center gap-3">
-      {/* Pill idioma — desktop */}
-      <button
-        type="button"
-        data-lang-toggle
-        class={`${pill} hidden px-5 py-2.5 font-mono text-sm text-text-primary transition-colors hover:border-accent hover:text-accent md:block`}
-      >
-        {langToggle}
-      </button>
+      {/* Toggle idioma — desktop */}
+      <div class="hidden md:block">
+        <LangToggle labels={langToggle} />
+      </div>
 
       {/* Hamburguesa — solo mobile */}
       <button
@@ -86,12 +83,9 @@ const pill = 'rounded-2xl border border-border bg-surface/80 backdrop-blur';
       class="flex flex-col gap-4"
       linkClass="block py-1 text-lg text-text-secondary transition-colors hover:text-accent"
     />
-    <button
-      type="button"
-      data-lang-toggle
-      class="border-border bg-bg text-text-primary hover:border-accent hover:text-accent mt-6 w-full rounded-xl border py-3 font-mono text-sm transition-colors"
-    >
-      {langToggle}
-    </button>
+    {/* Toggle idioma — mobile */}
+    <div class="mt-6">
+      <LangToggle labels={langToggle} class="w-full" />
+    </div>
   </div>
 </header>

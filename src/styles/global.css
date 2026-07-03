@@ -113,3 +113,41 @@ html:not([data-lang]) [data-lang='en'] {
 html:not([data-lang]) [data-lang='es'] {
   display: inline;
 }
+
+/*
+ * Toggle de idioma — indicador deslizante.
+ * Ver docs/plans/2026-07-03-lang-toggle-slider-design.md.
+ * El indicador se posiciona con translateX(0) cuando html está en es
+ * y con translateX(100%) cuando está en en. La transición se desactiva
+ * si el usuario pide menos animación.
+ *
+ * El slot activo lleva fondo accent (patrón "botón primario" del design
+ * system) y su texto se vuelve on-accent para mantener contraste.
+ */
+.lang-toggle__indicator {
+  transform: translateX(0);
+}
+
+html[data-lang='en'] .lang-toggle__indicator {
+  transform: translateX(100%);
+}
+
+/* Slot activo: indicador accent, texto on-accent (sincronizado con data-lang
+   para que el color del texto llegue junto con el indicador y no se vea
+   un frame con texto oscuro sobre surface-2). */
+html[data-lang='es'] .lang-toggle__indicator,
+html[data-lang='en'] .lang-toggle__indicator {
+  background-color: var(--color-accent);
+  border-color: transparent;
+}
+
+html[data-lang='es'] [data-lang-option='es'],
+html[data-lang='en'] [data-lang-option='en'] {
+  color: var(--color-on-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lang-toggle__indicator {
+    transition: none !important;
+  }
+}

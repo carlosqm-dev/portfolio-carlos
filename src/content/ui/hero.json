@@ -1,6 +1,6 @@
 {
   "brand": "Carlos Quiroz",
-  "langToggle": "ES / EN",
+  "langToggle": { "es": "ES", "en": "EN" },
   "nav": [
     { "href": "#stack", "label": { "es": "Stack", "en": "Stack" } },
     { "href": "#proyectos", "label": { "es": "Proyectos", "en": "Projects" } },
