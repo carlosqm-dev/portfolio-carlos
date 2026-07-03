@@ -1,0 +1,94 @@
+---
+/**
+ * Accesos directos del hero: GitHub, LinkedIn, CV y Email.
+ * Ver ADR-009: el email NO se muestra; al click se copia al portapapeles
+ * y el botón pasa a estado "copiado" (check + toast). Lo maneja
+ * src/features/hero/copy-email.ts vía el atributo `data-copy-email`.
+ *
+ * El swap de estado normal↔copiado se controla con `data-copied` en el
+ * botón y variantes group-data de Tailwind — sin JS en este componente.
+ */
+import Icon from '@/components/ui/Icon.astro';
+import T from '@/components/ui/T.astro';
+
+type Localized = { es: string; en: string };
+
+interface Props {
+  githubUrl: string;
+  linkedinUrl: string;
+  cvHref: string;
+  email: string;
+  labels: {
+    github: Localized;
+    linkedin: Localized;
+    cv: Localized;
+    email: Localized;
+  };
+  emailCopied: Localized;
+}
+
+const { githubUrl, linkedinUrl, cvHref, email, labels, emailCopied } = Astro.props;
+
+// Caja del icono — se eleva del lienzo y se "enciende" con el accent al hover.
+const box =
+  'grid size-14 place-items-center rounded-xl border border-border bg-surface text-text-secondary transition-colors group-hover:border-accent group-hover:text-accent';
+const label = 'font-mono text-xs text-text-muted';
+---
+
+<ul class="flex flex-wrap items-start gap-5">
+  <li>
+    <a
+      href={githubUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="group flex flex-col items-center gap-2"
+    >
+      <span class={box}><Icon name="simple-icons:github" size={26} /></span>
+      <span class={label}><T t={labels.github} /></span>
+    </a>
+  </li>
+
+  <li>
+    <a
+      href={linkedinUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="group flex flex-col items-center gap-2"
+    >
+      <span class={box}><Icon name="simple-icons:linkedin" size={26} /></span>
+      <span class={label}><T t={labels.linkedin} /></span>
+    </a>
+  </li>
+
+  <li>
+    <a href={cvHref} download class="group flex flex-col items-center gap-2">
+      <span class={box}><Icon name="local:cv" size={26} /></span>
+      <span class={label}><T t={labels.cv} /></span>
+    </a>
+  </li>
+
+  <li>
+    <button
+      type="button"
+      data-copy-email
+      data-email={email}
+      data-copied="false"
+      class="group flex flex-col items-center gap-2"
+    >
+      <span class={box}>
+        <Icon name="local:email" size={26} class="group-data-[copied=true]:hidden" />
+        <Icon
+          name="local:check"
+          size={26}
+          class="text-success hidden group-data-[copied=true]:block"
+        />
+      </span>
+      <span class="font-mono text-xs">
+        <span class="text-text-muted group-data-[copied=true]:hidden"><T t={labels.email} /></span>
+        <span class="text-success hidden group-data-[copied=true]:inline"
+          ><T t={emailCopied} /></span
+        >
+      </span>
+    </button>
+  </li>
+</ul>

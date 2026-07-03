@@ -64,7 +64,9 @@ async function main() {
   const projects = await loadProjects();
 
   if (projects.length === 0) {
-    console.log('ℹ️  No hay diagramas para generar (src/content/projects/*.json sin campo "diagrama").');
+    console.log(
+      'ℹ️  No hay diagramas para generar (src/content/projects/*.json sin campo "diagrama").',
+    );
     return;
   }
 

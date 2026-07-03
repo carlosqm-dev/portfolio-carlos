@@ -40,11 +40,13 @@ const { title, description } = Astro.props;
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
     />
 
-    {/*
+    {
+      /*
       Script inline de detección de idioma.
       Ver ADR-003: debe correr ANTES del primer paint para evitar flash.
       Lee localStorage, setea data-lang y lang, sin recargar.
-    */}
+    */
+    }
     <script is:inline>
       (function () {
         try {

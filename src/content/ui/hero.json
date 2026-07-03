@@ -1,0 +1,27 @@
+{
+  "brand": "Carlos Quiroz",
+  "langToggle": "ES / EN",
+  "nav": [
+    { "href": "#stack", "label": { "es": "Stack", "en": "Stack" } },
+    { "href": "#proyectos", "label": { "es": "Proyectos", "en": "Projects" } },
+    { "href": "#experiencia", "label": { "es": "Experiencia", "en": "Experience" } },
+    { "href": "#sobre-mi", "label": { "es": "Sobre mí", "en": "About" } }
+  ],
+  "greeting": { "es": "Hola, me llamo Carlos 👋", "en": "Hi, I'm Carlos 👋" },
+  "description": {
+    "es": "Soy desarrollador Full Stack con 1 año de experiencia. Diseño e implemento sistemas escalables alineados con los objetivos del negocio. Aplico arquitecturas y patrones de diseño óptimos en el backend, y construyo interfaces web enfocadas en la experiencia de usuario.",
+    "en": "I'm a Full Stack developer with 1 year of experience. I design and build scalable systems aligned with business goals. I apply solid architectures and design patterns on the backend, and craft web interfaces focused on the user experience."
+  },
+  "photoAlt": { "es": "Foto de Carlos Quiroz", "en": "Photo of Carlos Quiroz" },
+  "social": {
+    "githubUrl": "https://github.com/carlosqm-dev",
+    "linkedinUrl": "https://www.linkedin.com/in/carlosqm",
+    "email": "quirozcm.25@gmail.com",
+    "cvHref": "/CV-CarlosQuiroz.pdf",
+    "github": { "es": "GitHub", "en": "GitHub" },
+    "linkedin": { "es": "LinkedIn", "en": "LinkedIn" },
+    "cv": { "es": "CV", "en": "CV" },
+    "email_label": { "es": "Email", "en": "Email" }
+  },
+  "emailCopied": { "es": "email copiado!!", "en": "email copied!!" }
+}

@@ -10,11 +10,11 @@ Portafolio personal estático de Carlos Quiroz — desarrollador Full Stack. Ast
 
 ## Documentación obligatoria
 
-| Archivo | Qué contiene | Cuándo consultarlo |
-|---|---|---|
-| [`docs/CONTEXT.md`](docs/CONTEXT.md) | Objetivo, propuesta de valor, tono, estructura general | Antes de proponer copy, mensajes UI o tono de comunicación |
+| Archivo                                  | Qué contiene                                                       | Cuándo consultarlo                                                                                    |
+| ---------------------------------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- |
+| [`docs/CONTEXT.md`](docs/CONTEXT.md)     | Objetivo, propuesta de valor, tono, estructura general             | Antes de proponer copy, mensajes UI o tono de comunicación                                            |
 | [`docs/DECISIONS.md`](docs/DECISIONS.md) | 10 ADRs (arquitectura, datos, i18n, iconos, diagramas, estructura) | **Antes de cualquier implementación.** Ningún cambio debe contradecir un ADR sin actualizarlo primero |
-| [`docs/DESIGN.md`](docs/DESIGN.md) | Design system: tipografía, paleta, reglas por rol | Antes de tocar estilos, agregar colores o elegir tipografía |
+| [`docs/DESIGN.md`](docs/DESIGN.md)       | Design system: tipografía, paleta, reglas por rol                  | Antes de tocar estilos, agregar colores o elegir tipografía                                           |
 
 ## Reglas duras
 

@@ -1,0 +1,66 @@
+---
+/**
+ * Hero de la home — dos columnas: descripción + accesos (izq) y foto (der).
+ * En mobile la foto va encima del texto (order-first).
+ * Textos desde la colección `ui/hero` (ADR-002), render bilingüe con <T>.
+ */
+import { getEntry } from 'astro:content';
+import T from '@/components/ui/T.astro';
+import SocialLinks from './SocialLinks.astro';
+
+type Localized = { es: string; en: string };
+
+const hero = await getEntry('ui', 'hero');
+const { greeting, description, photoAlt, emailCopied, social } = hero.data as {
+  greeting: Localized;
+  description: Localized;
+  photoAlt: Localized;
+  emailCopied: Localized;
+  social: {
+    githubUrl: string;
+    linkedinUrl: string;
+    email: string;
+    cvHref: string;
+    github: Localized;
+    linkedin: Localized;
+    cv: Localized;
+    email_label: Localized;
+  };
+};
+---
+
+<section class="grid items-center gap-10 md:grid-cols-2 md:gap-16">
+  {/* Foto — encima del texto en mobile, a la derecha en desktop. */}
+  <div class="order-first flex justify-center md:order-last">
+    <img
+      src="/foto.png"
+      alt={photoAlt.es}
+      width="384"
+      height="384"
+      class="border-accent size-60 rounded-full border-4 object-cover sm:size-72 md:size-96"
+    />
+  </div>
+
+  {/* Texto + accesos directos */}
+  <div class="flex flex-col gap-6">
+    <T
+      as="h1"
+      t={greeting}
+      class="text-text-primary text-4xl leading-tight font-semibold md:text-5xl"
+    />
+    <T as="p" t={description} class="text-text-secondary max-w-prose leading-relaxed" />
+    <SocialLinks
+      githubUrl={social.githubUrl}
+      linkedinUrl={social.linkedinUrl}
+      cvHref={social.cvHref}
+      email={social.email}
+      labels={{
+        github: social.github,
+        linkedin: social.linkedin,
+        cv: social.cv,
+        email: social.email_label,
+      }}
+      emailCopied={emailCopied}
+    />
+  </div>
+</section>

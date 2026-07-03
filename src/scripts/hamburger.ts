@@ -15,9 +15,7 @@ function initHamburger(): void {
   buttons.forEach((btn) => {
     btn.addEventListener('click', () => {
       const targetId = btn.getAttribute('aria-controls');
-      const menu = targetId
-        ? document.getElementById(targetId)
-        : menus[0];
+      const menu = targetId ? document.getElementById(targetId) : menus[0];
       if (!menu) return;
 
       const isOpen = menu.dataset.open === 'true';
@@ -30,15 +28,24 @@ function initHamburger(): void {
     });
   });
 
+  function closeAll(): void {
+    menus.forEach((menu) => {
+      if (menu.dataset.open === 'true') menu.dataset.open = 'false';
+    });
+    buttons.forEach((b) => b.setAttribute('aria-expanded', 'false'));
+    document.body.style.overflow = '';
+  }
+
   // Cerrar con Escape
   document.addEventListener('keydown', (e) => {
-    if (e.key !== 'Escape') return;
-    menus.forEach((menu) => {
-      if (menu.dataset.open === 'true') {
-        menu.dataset.open = 'false';
-        buttons.forEach((b) => b.setAttribute('aria-expanded', 'false'));
-        document.body.style.overflow = '';
-      }
+    if (e.key === 'Escape') closeAll();
+  });
+
+  // Cerrar al navegar a una sección desde el propio menú (responsabilidad
+  // del menú: si el usuario elige un destino, el panel debe cerrarse).
+  menus.forEach((menu) => {
+    menu.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((link) => {
+      link.addEventListener('click', closeAll);
     });
   });
 }

@@ -62,6 +62,20 @@ html {
   -moz-osx-font-smoothing: grayscale;
   /* Evita el flash de idioma incorrecto — Ver ADR-003 */
   text-rendering: optimizeLegibility;
+  /* Navegación suave entre secciones desde el header (ADR-009) */
+  scroll-behavior: smooth;
+}
+
+/* Respeta la preferencia de menos animación */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* El header sticky no debe tapar el inicio de una sección al saltar a ella */
+section[id] {
+  scroll-margin-top: 6rem;
 }
 
 body {

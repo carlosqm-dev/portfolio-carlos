@@ -16,15 +16,7 @@ interface Props {
 }
 
 const { name, size = 20, class: className, label } = Astro.props;
-const ariaProps = label
-  ? { 'aria-label': label, role: 'img' }
-  : { 'aria-hidden': 'true' };
+const ariaProps = label ? { 'aria-label': label, role: 'img' } : { 'aria-hidden': 'true' };
 ---
 
-<AstroIcon
-  name={name}
-  width={size}
-  height={size}
-  class={className}
-  {...ariaProps}
-/>
+<AstroIcon name={name} width={size} height={size} class={className} {...ariaProps} />

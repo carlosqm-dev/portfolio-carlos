@@ -1,0 +1,31 @@
+---
+/**
+ * Lista de enlaces de navegación bilingüe.
+ * Se usa tanto en el nav de desktop como en el menú mobile (DRY).
+ * Los href son anchors a las secciones de la home (#stack, etc.);
+ * el scroll suave lo resuelve CSS (scroll-behavior), sin JS.
+ */
+import T from '@/components/ui/T.astro';
+
+type Localized = { es: string; en: string };
+
+interface Props {
+  items: { href: string; label: Localized }[];
+  class?: string;
+  linkClass?: string;
+}
+
+const { items, class: className, linkClass } = Astro.props;
+---
+
+<ul class={className}>
+  {
+    items.map((item) => (
+      <li>
+        <a href={item.href} class={linkClass} data-nav-link>
+          <T t={item.label} />
+        </a>
+      </li>
+    ))
+  }
+</ul>

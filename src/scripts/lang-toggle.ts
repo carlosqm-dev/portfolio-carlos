@@ -21,9 +21,7 @@ function setLang(lang: Lang): void {
   }
   // Avisar al resto de la página (para que un toggle visual, por ejemplo,
   // pueda re-renderizar labels de iconos)
-  document.dispatchEvent(
-    new CustomEvent('lang:change', { detail: { lang } }),
-  );
+  document.dispatchEvent(new CustomEvent('lang:change', { detail: { lang } }));
 }
 
 function initLangToggle(): void {

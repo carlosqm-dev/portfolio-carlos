@@ -1,6 +1,6 @@
 # Design System — Portafolio
 
-Documento de referencia para el uso de color y tipografía. No es una hoja de tokens: explica *para qué* sirve cada color y cada fuente, y *cuándo* usarlos. La regla general es que ningún estilo se elige a ojo, se deriva del rol del elemento.
+Documento de referencia para el uso de color y tipografía. No es una hoja de tokens: explica _para qué_ sirve cada color y cada fuente, y _cuándo_ usarlos. La regla general es que ningún estilo se elige a ojo, se deriva del rol del elemento.
 
 ---
 

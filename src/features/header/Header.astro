@@ -1,0 +1,97 @@
+---
+/**
+ * Header del sitio — 3 pills (marca · navegación · idioma).
+ * Ver ADR-009: pills integrados al inicio; sticky al hacer scroll.
+ * En mobile el nav colapsa a hamburguesa y el pill de marca queda visible.
+ *
+ * Contratos reutilizados (no reinventar):
+ *  - Toggle idioma: atributo `data-lang-toggle` (src/scripts/lang-toggle.ts).
+ *  - Hamburguesa: `data-hamburger` + `aria-controls` → `[data-mobile-menu]`
+ *    con `data-open` (src/scripts/hamburger.ts).
+ */
+import { getEntry } from 'astro:content';
+import T from '@/components/ui/T.astro';
+import Icon from '@/components/ui/Icon.astro';
+import NavLinks from './NavLinks.astro';
+
+type Localized = { es: string; en: string };
+
+const hero = await getEntry('ui', 'hero');
+// La colección `ui` tiene shape abierto (ADR-002); tipamos lo que consumimos.
+const { brand, langToggle, nav } = hero.data as {
+  brand: string;
+  langToggle: string;
+  nav: { href: string; label: Localized }[];
+};
+
+const menuId = 'mobile-nav';
+
+// Pill compartido — bg elevado sobre el lienzo, borde sutil (DESIGN.md).
+const pill = 'rounded-2xl border border-border bg-surface/80 backdrop-blur';
+---
+
+<header class="bg-bg/70 sticky top-0 z-50 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-4">
+    {/* Pill marca — siempre visible, también en mobile */}
+    <a
+      href="#top"
+      class={`${pill} px-5 py-2.5 font-medium text-text-primary transition-colors hover:border-border-strong`}
+    >
+      {brand}
+    </a>
+
+    {/* Pill navegación — solo desktop */}
+    <nav class={`${pill} hidden px-6 py-2.5 md:block`} aria-label="Principal">
+      <NavLinks
+        items={nav}
+        class="flex items-center gap-6"
+        linkClass="text-text-secondary transition-colors hover:text-accent"
+      />
+    </nav>
+
+    <div class="flex items-center gap-3">
+      {/* Pill idioma — desktop */}
+      <button
+        type="button"
+        data-lang-toggle
+        class={`${pill} hidden px-5 py-2.5 font-mono text-sm text-text-primary transition-colors hover:border-accent hover:text-accent md:block`}
+      >
+        {langToggle}
+      </button>
+
+      {/* Hamburguesa — solo mobile */}
+      <button
+        type="button"
+        data-hamburger
+        aria-controls={menuId}
+        aria-expanded="false"
+        aria-label="Abrir menú"
+        class={`group ${pill} grid size-11 place-items-center text-text-primary md:hidden`}
+      >
+        <Icon name="local:menu" size={22} class="block group-aria-[expanded=true]:hidden" />
+        <Icon name="local:close" size={22} class="hidden group-aria-[expanded=true]:block" />
+      </button>
+    </div>
+  </div>
+
+  {/* Menú mobile — desplegable controlado por data-open (hamburger.ts) */}
+  <div
+    id={menuId}
+    data-mobile-menu
+    data-open="false"
+    class="border-border bg-surface absolute inset-x-0 top-full hidden origin-top border-b px-4 py-6 shadow-lg data-[open=true]:block md:hidden"
+  >
+    <NavLinks
+      items={nav}
+      class="flex flex-col gap-4"
+      linkClass="block py-1 text-lg text-text-secondary transition-colors hover:text-accent"
+    />
+    <button
+      type="button"
+      data-lang-toggle
+      class="border-border bg-bg text-text-primary hover:border-accent hover:text-accent mt-6 w-full rounded-xl border py-3 font-mono text-sm transition-colors"
+    >
+      {langToggle}
+    </button>
+  </div>
+</header>

@@ -12,6 +12,7 @@ Este documento es la fuente de verdad para el agente. Ninguna implementación de
 **Contexto:** Sitio de contenido con interactividad puntual. Objetivo futuro: sección de Blog.
 
 **Consecuencias:**
+
 - Zero JS por defecto; la interactividad se resuelve con scripts vanilla, no islands de framework.
 - No usar React/Vue para carrusel, hamburguesa ni toggle de idioma. Carrusel: CSS scroll-snap o Embla (vanilla).
 - El blog futuro se agrega como Content Collection nueva + ruta, sin migración.
@@ -26,6 +27,7 @@ Este documento es la fuente de verdad para el agente. Ninguna implementación de
 **Contexto:** Requisito explícito de cero hardcodeo para facilitar cambios sin tocar la interfaz.
 
 **Consecuencias:**
+
 - Colecciones: `projects/`, `experience/`, `stack/`, `about/`, `ui/` (textos del propio UI: labels del nav, "Más información →", "email copiado!!", etc.).
 - Si falta un campo requerido, el build falla (validación Zod), no la UI.
 - Los componentes solo consumen vía `getCollection()` / `getEntry()`. Nunca definen contenido.
@@ -39,11 +41,13 @@ Este documento es la fuente de verdad para el agente. Ninguna implementación de
 **Contexto:** Se evaluó el i18n por rutas de Astro (`/es/`, `/en/`). Se descartó por UX: recarga de página al cambiar idioma y duplicación de estructura por locale.
 
 **Consecuencias (trade-offs aceptados):**
+
 - Sin SEO del idioma secundario (crawlers solo ven el idioma por defecto). Aceptado.
 - HTML ~2x en secciones de texto. Irrelevante a esta escala.
 - Reversible: si algún día se requiere SEO en inglés, los datos ya están estructurados como `{ es, en }` y la migración a rutas i18n es directa.
 
 **Implementación obligatoria:**
+
 - Helper Zod compartido: `const localized = z.object({ es: z.string(), en: z.string() })`.
 - Componente único `components/ui/T.astro` que renderiza el par `<span data-lang="es">` / `<span data-lang="en">`. Es el único lugar donde vive el patrón bilingüe.
 - Script inline en `<head>` (antes del render del body): lee `localStorage.getItem('lang')`, setea `document.documentElement.dataset.lang` y `document.documentElement.lang`. Evita flash de idioma incorrecto.
@@ -59,6 +63,7 @@ Este documento es la fuente de verdad para el agente. Ninguna implementación de
 **Contexto:** La sección Stack renderiza 4 cards (una por categoría). Otras secciones (detalle de proyecto) referencian tecnologías del mismo catálogo.
 
 **Consecuencias:**
+
 - Una entrada del catálogo = `{ id, nombre, icono }` donde `icono` es la key de astro-icon (ej. `simple-icons:fastapi` o `local:nombre` para iconos propios).
 - El campo `stack` de cada proyecto es un array de `id`s del catálogo, no strings libres. Zod valida contra el catálogo para impedir referencias rotas.
 - Agregar una tecnología = agregar una entrada al catálogo. La UI (card de categoría y badges en detalle de proyecto) se actualiza sola.
@@ -73,6 +78,7 @@ Este documento es la fuente de verdad para el agente. Ninguna implementación de
 **Contexto:** Se evaluó el CDN de Simple Icons por URL. Se descartó: requests HTTP en runtime, dependencia de servicio externo en producción, sin coloreado reactivo con CSS, y forzaba un segundo sistema para iconos faltantes.
 
 **Consecuencias:**
+
 - SVG inline en build, tree-shaken (solo los iconos usados llegan al HTML). Cero runtime, cero requests.
 - `public/` no contiene iconos.
 - Iconos coloreables con `currentColor` (hover, dark mode).
@@ -88,6 +94,7 @@ Este documento es la fuente de verdad para el agente. Ninguna implementación de
 **Contexto:** Se evaluó modal/overlay para el detalle.
 
 **Consecuencias:**
+
 - URL compartible, botón atrás nativo, SEO por proyecto.
 - El grid de la home muestra los proyectos ordenados por campo `orden`, 2 por fila.
 - "Más información →" navega a la ruta del proyecto.
@@ -101,6 +108,7 @@ Este documento es la fuente de verdad para el agente. Ninguna implementación de
 **Contexto:** Se evaluó renderizar Mermaid en cliente (peso de librería en runtime) y generar en el build de Vercel (mermaid-cli arrastra Puppeteer/Chromium e infla el build por artefactos que solo cambian al editar un diagrama).
 
 **Consecuencias:**
+
 - El string Mermaid NO incluye dirección; el script inyecta LR o TB según variante. No se duplica el grafo.
 - La UI carga el SVG como imagen y alterna variante por breakpoint (`<picture>` con media query o dos `<img>` con `hidden md:block`).
 - Los SVGs commiteados son artefactos derivados. Regla: si se edita el string Mermaid de un proyecto, se debe correr `pnpm diagrams` antes de commitear.
@@ -145,6 +153,7 @@ public/
 **Decisión:** Header de 3 pills con bordes semi-redondeados, integrados al hero al inicio; al hacer scroll se fijan arriba (sticky). En mobile, el nav colapsa a menú hamburguesa; el pill "Carlos Quiroz" permanece visible.
 
 **Consecuencias:**
+
 - Hero en dos columnas: izquierda descripción + botones de acceso (GitHub, LinkedIn, CV, Email); derecha foto en tamaño amplio.
 - CV: descarga directa del archivo.
 - Email: no se expone; al click se copia al portapapeles. Dos estados visuales: icono normal → confirmación "email copiado!!". Implementar con Clipboard API + timeout de reversión.
@@ -163,14 +172,14 @@ public/
 
 ### Nomenclatura de archivos
 
-| Tipo | Convención | Ejemplo |
-|---|---|---|
-| Componentes Astro | PascalCase | `ProjectCard.astro`, `Timeline.astro` |
-| Scripts / utilidades TS | kebab-case | `copy-email.ts`, `build-diagrams.mjs` |
-| Datos de colecciones | kebab-case | `gestor-cotizaciones.json`, `catalog.json` |
-| Iconos locales (SVG) | kebab-case | `app-runner.svg` |
-| Rutas (pages) | kebab-case | `proyectos/[slug].astro` |
-| CSS / estilos globales | kebab-case | `global.css` |
+| Tipo                    | Convención | Ejemplo                                    |
+| ----------------------- | ---------- | ------------------------------------------ |
+| Componentes Astro       | PascalCase | `ProjectCard.astro`, `Timeline.astro`      |
+| Scripts / utilidades TS | kebab-case | `copy-email.ts`, `build-diagrams.mjs`      |
+| Datos de colecciones    | kebab-case | `gestor-cotizaciones.json`, `catalog.json` |
+| Iconos locales (SVG)    | kebab-case | `app-runner.svg`                           |
+| Rutas (pages)           | kebab-case | `proyectos/[slug].astro`                   |
+| CSS / estilos globales  | kebab-case | `global.css`                               |
 
 - El `slug` de un proyecto = nombre de su archivo de datos. `gestor-cotizaciones.json` → `/proyectos/gestor-cotizaciones`.
 - Un componente por archivo. Si un componente crece con sub-partes, se descompone dentro de su feature (`projects/ProjectCard.astro` + `projects/ProjectBadge.astro`), no en un archivo gigante.
@@ -197,6 +206,7 @@ public/
 // ProjectCard.astro
 const { project } = Astro.props;
 ---
+
 <article class="card">
   <h3>{project.titulo.es}</h3>
   <p>{project.descripcion.es}</p>
@@ -223,6 +233,7 @@ const { project } = Astro.props;
 // Textos de UI centralizados — ver ADR-002
 const ui = await getEntry('ui', 'labels');
 ---
+
 <article class="card">
   <h3><T t={project.data.titulo} /></h3>
   <p><T t={project.data.descripcion} /></p>

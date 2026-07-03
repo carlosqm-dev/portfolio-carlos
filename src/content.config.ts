@@ -115,10 +115,12 @@ const about = defineCollection({
  */
 const ui = defineCollection({
   loader: glob({ pattern: '*.json', base: './src/content/ui' }),
-  schema: z.object({
-    // Una entrada por archivo. Por ejemplo "labels", "hero", "footer".
-    // Cada archivo puede tener cualquier shape — son los strings del UI.
-  }),
+  // Una entrada por archivo. Por ejemplo "labels", "hero", "footer".
+  // Cada archivo puede tener cualquier shape — son los strings del UI.
+  // `.passthrough()` es OBLIGATORIO: sin él Zod elimina las claves
+  // desconocidas y `getEntry('ui', ...)` devolvería un objeto vacío.
+  // El componente que consume cada archivo tipa lo que necesita.
+  schema: z.object({}).passthrough(),
 });
 
 export const collections = { stack, projects, experience, about, ui };
