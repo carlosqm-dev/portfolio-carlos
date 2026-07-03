@@ -1,0 +1,66 @@
+---
+/**
+ * Layout raíz del sitio.
+ * Responsabilidades:
+ *  - <html lang> con valor sincronizado al data-lang (Ver ADR-003)
+ *  - Script inline en <head> que setea data-lang ANTES del primer paint
+ *    para evitar flash de idioma incorrecto.
+ *  - Carga de fuentes y CSS global.
+ */
+
+import '@/styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" data-lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    {/* SEO base — completar por página */}
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+
+    {/* Favicon (TODO: agregar cuando lo tengas) */}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    {/* Tipografía — Inter + JetBrains Mono. Ver DESIGN.md */}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+
+    {/*
+      Script inline de detección de idioma.
+      Ver ADR-003: debe correr ANTES del primer paint para evitar flash.
+      Lee localStorage, setea data-lang y lang, sin recargar.
+    */}
+    <script is:inline>
+      (function () {
+        try {
+          var saved = localStorage.getItem('lang');
+          var lang = saved === 'en' ? 'en' : 'es';
+          document.documentElement.dataset.lang = lang;
+          document.documentElement.lang = lang;
+        } catch (_) {
+          // localStorage puede fallar en modo privado; caemos a 'es'
+          document.documentElement.dataset.lang = 'es';
+        }
+      })();
+    </script>
+  </head>
+
+  <body>
+    <slot />
+  </body>
+</html>

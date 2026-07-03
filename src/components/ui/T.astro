@@ -1,0 +1,34 @@
+---
+/**
+ * Componente bilingüe.
+ * Ver ADR-003: el ÚNICO lugar donde vive el patrón de render bilingüe.
+ * No usar `dato.es` ni `dato.en` directo en otros componentes —
+ * siempre pasar por <T t={dato} />.
+ *
+ * La visibilidad se controla SOLO por CSS (ver global.css):
+ *   html[data-lang='en'] [data-lang='es'] { display: none; }
+ * No usar el atributo `hidden`.
+ */
+
+type Localized = { es: string; en: string };
+
+interface Props {
+  t: Localized;
+  /**
+   * Tag HTML a renderizar. Por defecto 'span'.
+   * Útil para casos semánticos: 'h1', 'p', 'a', etc.
+   * Los spans internos siguen siendo <span data-lang="...">.
+   */
+  as?: 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'a' | 'strong' | 'em';
+  class?: string;
+  /** Atributos extra (href para <a>, etc.) */
+  [key: string]: unknown;
+}
+
+const { t, as: Tag = 'span', class: className, ...rest } = Astro.props;
+---
+
+<Tag class={className} {...rest}>
+  <span data-lang="es">{t.es}</span>
+  <span data-lang="en">{t.en}</span>
+</Tag>

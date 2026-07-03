@@ -1,0 +1,30 @@
+---
+/**
+ * Wrapper sobre astro-icon.
+ * Ver ADR-005: sintaxis única "simple-icons:x" o "local:x".
+ * Por defecto aria-hidden=true: los iconos suelen ser decorativos y
+ * el texto adyacente ya comunica el significado. Pasar label para los
+ * que sí necesitan ser anunciados (ej: ícono de "Copiar" sin texto).
+ */
+import { Icon as AstroIcon } from 'astro-icon/components';
+
+interface Props {
+  name: string;
+  size?: number | string;
+  class?: string;
+  label?: string;
+}
+
+const { name, size = 20, class: className, label } = Astro.props;
+const ariaProps = label
+  ? { 'aria-label': label, role: 'img' }
+  : { 'aria-hidden': 'true' };
+---
+
+<AstroIcon
+  name={name}
+  width={size}
+  height={size}
+  class={className}
+  {...ariaProps}
+/>

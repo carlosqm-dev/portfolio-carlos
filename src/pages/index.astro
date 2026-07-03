@@ -1,0 +1,46 @@
+---
+/**
+ * Smoke test: valida que el setup base funcione (Tailwind 4, fuentes,
+ * sistema bilingüe, tokens del design system). Reemplazar por la home
+ * real en el siguiente paso.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import T from '@/components/ui/T.astro';
+---
+
+<BaseLayout title="Carlos Quiroz — Portafolio" description="Smoke test">
+  <main class="mx-auto max-w-3xl px-6 py-20">
+    <h1 class="mb-4 text-4xl font-semibold text-text-primary">
+      <T t={{ es: 'Hola, mundo', en: 'Hello, world' }} />
+    </h1>
+
+    <p class="mb-6 text-text-secondary">
+      <T
+        t={{
+          es: 'Este es un smoke test del setup. Si ves dos textos que cambian con el toggle, todo está bien.',
+          en: 'This is a setup smoke test. If you see two texts that change with the toggle, everything is wired up.',
+        }}
+      />
+    </p>
+
+    <button
+      data-lang-toggle
+      class="rounded-md border border-border bg-surface px-4 py-2 text-text-primary transition-colors hover:border-accent hover:text-accent"
+    >
+      <T t={{ es: 'Cambiar idioma', en: 'Switch language' }} />
+    </button>
+
+    <p class="mt-12 font-mono text-sm text-text-muted">
+      <T
+        t={{
+          es: 'Stack: Astro 7 · Tailwind 4 · TypeScript estricto',
+          en: 'Stack: Astro 7 · Tailwind 4 · strict TypeScript',
+        }}
+      />
+    </p>
+  </main>
+
+  <script>
+    import '@/scripts/lang-toggle.ts';
+  </script>
+</BaseLayout>

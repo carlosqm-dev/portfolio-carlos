@@ -1,0 +1,101 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens
+ * Ver docs/DESIGN.md — la paleta vive acá, no en los componentes.
+ * Regla: el color se elige por ROL, no a ojo. Si no encontrás el rol
+ * acá, falta un token, no un color nuevo.
+ *
+ * Tokens mapeados a @theme para que estén disponibles como utilidades
+ * Tailwind 4: bg-bg, bg-surface, text-text-primary, border-border, etc.
+ */
+@theme {
+  /* Tipografía */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Fondos (3 niveles, no más — ver DESIGN.md) */
+  --color-bg: #0a0a0b;
+  --color-surface: #141416;
+  --color-surface-2: #1c1c20;
+
+  /* Bordes */
+  --color-border: #26262b;
+  --color-border-strong: #33333a;
+
+  /* Texto (3 niveles de jerarquía) */
+  --color-text-primary: #f4f4f5;
+  --color-text-secondary: #a1a1aa;
+  --color-text-muted: #71717a;
+
+  /* Accent — el único color vivo, usado con escasez */
+  --color-accent: #1f9cff;
+  --color-accent-hover: #4db2ff;
+  --color-on-accent: #04121f;
+
+  /* Estados funcionales */
+  --color-success: #34d399;
+  --color-danger: #f87171;
+}
+
+/* Variables con alpha — no se pueden poner en @theme de Tailwind 4
+ * sin un wrapper. Se exponen como CSS vars sueltas. */
+:root {
+  --accent-subtle: rgba(31, 156, 255, 0.12);
+  --focus-ring: rgba(31, 156, 255, 0.5);
+  --selection: rgba(31, 156, 255, 0.2);
+  --grid-line: rgba(255, 255, 255, 0.03);
+}
+
+/* Reset mínimo y base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--color-bg);
+  color: var(--color-text-secondary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Evita el flash de idioma incorrecto — Ver ADR-003 */
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+::selection {
+  background: var(--selection);
+  color: var(--color-text-primary);
+}
+
+/* Focus ring de accesibilidad — Ver DESIGN.md */
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/*
+ * Sistema bilingüe
+ * Ver ADR-003: visibilidad controlada SOLO por CSS.
+ * El script inline en <head> setea document.documentElement.dataset.lang
+ * ANTES del primer paint para evitar flash de idioma incorrecto.
+ */
+html[data-lang='en'] [data-lang='es'],
+html[data-lang='es'] [data-lang='en'] {
+  display: none;
+}
+
+/* Por defecto, mostramos el idioma español si el script inline aún no corrió */
+html:not([data-lang]) [data-lang='en'] {
+  display: none;
+}
+html:not([data-lang]) [data-lang='es'] {
+  display: inline;
+}

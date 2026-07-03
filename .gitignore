@@ -1,0 +1,36 @@
+# Build output
+dist/
+.astro/
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+
+# Mermaid CLI cache (mermaid-cli arrastra Puppeteer/Chromium, ~300MB)
+# Si lo commiteás por accidente, ocupa el repo. Lo regeneramos con `pnpm diagrams`.
+.mermaid-cache/
+.puppeteer/
+
+# Vercel
+.vercel
