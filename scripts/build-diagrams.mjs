@@ -11,7 +11,8 @@
  * Uso: pnpm diagrams
  */
 
-import { readdir, readFile, writeFile, mkdir } from 'node:fs/promises';
+import { readdir, readFile, writeFile, mkdir, mkdtemp, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -53,12 +54,6 @@ function withDirection(source, direction) {
   return `flowchart ${direction}\n${source}`;
 }
 
-async function renderSvg(mermaidSource) {
-  // Importación dinámica para no cargar Puppeteer si no hay diagramas.
-  const { default: mermaid } = await import('@mermaid-js/mermaid-cli');
-  return mermaid.renderDiagram(mermaidSource);
-}
-
 async function main() {
   await mkdir(OUT_DIR, { recursive: true });
   const projects = await loadProjects();
@@ -70,21 +65,36 @@ async function main() {
     return;
   }
 
-  for (const { slug, source } of projects) {
-    const desktopSrc = withDirection(source, 'LR');
-    const mobileSrc = withDirection(source, 'TB');
+  // Importación dinámica para no cargar Puppeteer si no hay diagramas.
+  // mermaid-cli no tiene default export; se usa run(input, output), que
+  // maneja el browser internamente (puppeteer es dep transitiva y pnpm
+  // no permite importarla directo). run() exige archivos, no strings:
+  // se escriben .mmd temporales por variante.
+  const { run } = await import('@mermaid-js/mermaid-cli');
+  const tmpDir = await mkdtemp(join(tmpdir(), 'diagrams-'));
 
-    try {
-      const desktopSvg = await renderSvg(desktopSrc);
-      const mobileSvg = await renderSvg(mobileSrc);
-      await writeFile(join(OUT_DIR, `${slug}-desktop.svg`), desktopSvg);
-      await writeFile(join(OUT_DIR, `${slug}-mobile.svg`), mobileSvg);
-      console.log(`✅ ${slug}: desktop.svg + mobile.svg`);
-    } catch (err) {
-      console.error(`❌ ${slug}: error renderizando`);
-      console.error(err);
-      process.exitCode = 1;
+  try {
+    for (const { slug, source } of projects) {
+      const variants = [
+        { suffix: 'desktop', direction: 'LR' },
+        { suffix: 'mobile', direction: 'TB' },
+      ];
+
+      try {
+        for (const { suffix, direction } of variants) {
+          const input = join(tmpDir, `${slug}-${suffix}.mmd`);
+          await writeFile(input, withDirection(source, direction));
+          await run(input, join(OUT_DIR, `${slug}-${suffix}.svg`), { quiet: true });
+        }
+        console.log(`✅ ${slug}: desktop.svg + mobile.svg`);
+      } catch (err) {
+        console.error(`❌ ${slug}: error renderizando`);
+        console.error(err);
+        process.exitCode = 1;
+      }
     }
+  } finally {
+    await rm(tmpDir, { recursive: true, force: true });
   }
 }
 
