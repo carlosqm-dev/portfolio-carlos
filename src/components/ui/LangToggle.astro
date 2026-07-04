@@ -55,7 +55,7 @@ const { labels, class: extraClass = '' } = Astro.props;
     type="button"
     data-lang-option="es"
     aria-pressed="true"
-    class="lang-toggle__btn text-text-primary relative z-10 px-3 py-1 font-mono text-sm transition-colors"
+    class="lang-toggle__btn text-text-primary relative z-10 flex-1 px-3 py-1 text-center font-mono text-sm transition-colors"
   >
     {labels.es}
   </button>
@@ -63,7 +63,7 @@ const { labels, class: extraClass = '' } = Astro.props;
     type="button"
     data-lang-option="en"
     aria-pressed="false"
-    class="lang-toggle__btn text-text-muted hover:text-text-secondary relative z-10 px-3 py-1 font-mono text-sm transition-colors"
+    class="lang-toggle__btn text-text-muted hover:text-text-secondary relative z-10 flex-1 px-3 py-1 text-center font-mono text-sm transition-colors"
   >
     {labels.en}
   </button>
