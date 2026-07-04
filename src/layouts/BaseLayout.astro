@@ -9,6 +9,7 @@
  */
 
 import '@/styles/global.css';
+import Footer from '@/features/footer/Footer.astro';
 
 interface Props {
   title: string;
@@ -63,6 +64,16 @@ const { title, description } = Astro.props;
   </head>
 
   <body>
-    <slot />
+    {
+      /*
+      Efecto "reveal" del footer: el contenido lleva fondo opaco y z-index
+      mayor; el footer (sticky bottom, z-0) queda detrás y se descubre
+      al llegar al final del scroll. Ver Footer.astro.
+    */
+    }
+    <div class="bg-bg relative z-10">
+      <slot />
+    </div>
+    <Footer />
   </body>
 </html>

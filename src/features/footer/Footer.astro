@@ -1,0 +1,82 @@
+---
+/**
+ * Footer con efecto "reveal": queda pegado al fondo del viewport
+ * (sticky bottom) DETRÁS del contenido, y se descubre a medida que la
+ * página termina de scrollear. El contraparte vive en BaseLayout: el
+ * wrapper del contenido lleva `relative z-10 bg-bg` para taparlo.
+ * CSS puro, sin JS (ADR-001).
+ *
+ * Decoración "horizonte": recuadros delineados alineados a la base,
+ * sin relleno, con alturas en montaña (crecen hacia el centro). Todas
+ * las barras rematan arriba con el accent.
+ *
+ * Links y marca se reutilizan de `ui/hero` para no duplicar datos
+ * (ADR-002: una única fuente por dato).
+ */
+import { getEntry } from 'astro:content';
+import Icon from '@/components/ui/Icon.astro';
+import T from '@/components/ui/T.astro';
+
+type Localized = { es: string; en: string };
+
+const hero = await getEntry('ui', 'hero');
+const { brand, social } = hero.data as {
+  brand: string;
+  social: {
+    githubUrl: string;
+    linkedinUrl: string;
+    github: Localized;
+    linkedin: Localized;
+  };
+};
+
+const footer = await getEntry('ui', 'footer');
+const { copyright } = footer.data as { copyright: Localized };
+
+// Año calculado en build — el sitio es estático, se refresca al rebuildear.
+const year = new Date().getFullYear();
+
+// Horizonte: alturas en % de la franja, crecientes hasta el centro y
+// luego decrecientes. Todas rematan con el borde superior en accent.
+const bars = [32, 52, 72, 100, 72, 52, 32];
+
+const iconBox =
+  'grid size-10 place-items-center rounded-lg border border-border bg-surface text-text-secondary transition-colors hover:border-accent hover:text-accent';
+---
+
+<footer class="border-border sticky bottom-0 z-0 border-t">
+  <div class="mx-auto max-w-6xl px-4 pt-10 pb-8">
+    <ul class="flex gap-3">
+      <li>
+        <a href={social.githubUrl} target="_blank" rel="noopener noreferrer" class={iconBox}>
+          <Icon name="simple-icons:github" size={20} />
+          <span class="sr-only"><T t={social.github} /></span>
+        </a>
+      </li>
+      <li>
+        <a href={social.linkedinUrl} target="_blank" rel="noopener noreferrer" class={iconBox}>
+          <Icon name="simple-icons:linkedin" size={20} />
+          <span class="sr-only"><T t={social.linkedin} /></span>
+        </a>
+      </li>
+    </ul>
+
+    <p class="text-text-muted mt-5 font-mono text-xs">
+      © {year} {brand}. <T t={copyright} />
+    </p>
+  </div>
+
+  {/* Horizonte decorativo — invisible para lectores de pantalla */}
+  <div class="flex h-28 items-end px-2 md:h-40 md:px-3" aria-hidden="true">
+    {
+      /* Barras contiguas: -ml-px solapa los bordes laterales para que el
+         separador entre barras siga siendo de 1px, no de 2px. */
+      bars.map((height) => (
+        <div
+          class="border-border border-t-accent -ml-px flex-1 border first:ml-0"
+          style={`height: ${height}%`}
+        />
+      ))
+    }
+  </div>
+</footer>
