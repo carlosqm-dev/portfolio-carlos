@@ -1,0 +1,51 @@
+---
+/**
+ * Botones GitHub / Web de un proyecto. Se usa en el header y en el footer
+ * del detalle (ver ADR-006), por eso vive aparte de ProjectHeader.
+ * Cada botón se renderiza solo si su link existe.
+ */
+import { getEntry } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Icon from '@/components/ui/Icon.astro';
+import T from '@/components/ui/T.astro';
+
+interface Props {
+  links: CollectionEntry<'projects'>['data']['links'];
+}
+
+const { links } = Astro.props;
+
+const ui = await getEntry('ui', 'projects');
+const { github, web } = ui.data as {
+  github: { es: string; en: string };
+  web: { es: string; en: string };
+};
+---
+
+{
+  (links?.repo || links?.demo) && (
+    <div class="flex items-center gap-3">
+      {links.repo && (
+        <a
+          href={links.repo}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="border-border text-text-secondary hover:border-accent hover:text-accent inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm transition-colors"
+        >
+          <Icon name="simple-icons:github" size={18} />
+          <T t={github} />
+        </a>
+      )}
+      {links.demo && (
+        <a
+          href={links.demo}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-accent text-on-accent hover:bg-accent-hover inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors"
+        >
+          <T t={web} />
+        </a>
+      )}
+    </div>
+  )
+}

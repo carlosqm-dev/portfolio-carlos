@@ -1,0 +1,60 @@
+---
+/**
+ * Encabezado del detalle de proyecto (ver ADR-006).
+ * No hay Header/nav acá: el botón "volver" reemplaza la navegación global
+ * y regresa al grid de la home (`/#proyectos`).
+ */
+import { getEntry } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import T from '@/components/ui/T.astro';
+import ProjectLinks from './ProjectLinks.astro';
+
+interface Props {
+  entry: CollectionEntry<'projects'>;
+}
+
+const { entry } = Astro.props;
+const { titulo, estado, links } = entry.data;
+
+const ui = await getEntry('ui', 'projects');
+const { volver, estado: estadoLabels } = ui.data as {
+  volver: { es: string; en: string };
+  estado: Record<
+    NonNullable<CollectionEntry<'projects'>['data']['estado']>,
+    { es: string; en: string }
+  >;
+};
+---
+
+<div class="flex flex-col gap-6">
+  <a
+    href="/#proyectos"
+    class="text-text-secondary hover:text-accent inline-flex w-fit items-center text-sm transition-colors"
+  >
+    <T t={volver} />
+  </a>
+
+  <div class="flex flex-wrap items-center justify-between gap-4">
+    <div class="flex flex-wrap items-center gap-4">
+      <T as="h1" t={titulo} class="text-text-primary text-3xl font-semibold md:text-4xl" />
+      {
+        estado && (
+          // Sin token de estado en DESIGN.md: se usa el rol de badge —
+          // fondo accent-subtle + texto accent (ver docs/DESIGN.md).
+          <span class="badge-estado text-accent inline-flex items-center rounded-full px-3 py-1 text-xs font-medium">
+            <T t={estadoLabels[estado]} />
+          </span>
+        )
+      }
+    </div>
+    <ProjectLinks links={links} />
+  </div>
+</div>
+
+<style>
+  /* accent-subtle es rgba, no puede vivir en @theme (ver global.css) —
+     se aplica como CSS plano en vez de una utilidad Tailwind. */
+  .badge-estado {
+    background: var(--accent-subtle);
+  }
+</style>
