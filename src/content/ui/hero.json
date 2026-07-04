@@ -23,5 +23,5 @@
     "cv": { "es": "CV", "en": "CV" },
     "email_label": { "es": "Email", "en": "Email" }
   },
-  "emailCopied": { "es": "email copiado!!", "en": "email copied!!" }
+  "emailCopied": { "es": "Copiado!", "en": "Copied!" }
 }
