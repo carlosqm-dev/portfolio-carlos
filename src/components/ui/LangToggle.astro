@@ -36,24 +36,26 @@ const { labels, class: extraClass = '' } = Astro.props;
   aria-label="Idioma"
   data-lang-toggle-root
   class:list={[
-    'lang-toggle relative inline-flex items-center rounded-2xl border border-border bg-surface/80 p-1',
+    'lang-toggle border-border bg-surface/80 relative inline-flex items-center rounded-2xl border p-1',
     extraClass,
   ]}
 >
-  {/* Indicador deslizante — único span, animado por CSS leyendo html[data-lang].
+  {
+    /* Indicador deslizante — único span, animado por CSS leyendo html[data-lang].
       Ver docs/plans/2026-07-03-lang-toggle-slider-design.md.
       En estado activo: fondo accent + texto on-accent (patrón "botón primario"
-      del design system, aplicado al slot activo del toggle). */}
+      del design system, aplicado al slot activo del toggle). */
+  }
   <span
     aria-hidden="true"
-    class="lang-toggle__indicator pointer-events-none absolute top-1 bottom-1 left-1 w-[calc(50%-0.25rem)] rounded-xl border border-transparent bg-surface-2 transition-[transform,background-color,border-color] duration-200 ease-out"
+    class="lang-toggle__indicator bg-surface-2 pointer-events-none absolute top-1 bottom-1 left-1 w-[calc(50%-0.25rem)] rounded-xl border border-transparent transition-[transform,background-color,border-color] duration-200 ease-out"
   ></span>
 
   <button
     type="button"
     data-lang-option="es"
     aria-pressed="true"
-    class="lang-toggle__btn relative z-10 px-3 py-1 font-mono text-sm text-text-primary transition-colors"
+    class="lang-toggle__btn text-text-primary relative z-10 px-3 py-1 font-mono text-sm transition-colors"
   >
     {labels.es}
   </button>
@@ -61,7 +63,7 @@ const { labels, class: extraClass = '' } = Astro.props;
     type="button"
     data-lang-option="en"
     aria-pressed="false"
-    class="lang-toggle__btn relative z-10 px-3 py-1 font-mono text-sm text-text-muted transition-colors hover:text-text-secondary"
+    class="lang-toggle__btn text-text-muted hover:text-text-secondary relative z-10 px-3 py-1 font-mono text-sm transition-colors"
   >
     {labels.en}
   </button>

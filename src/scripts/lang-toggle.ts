@@ -38,7 +38,7 @@ function setLang(lang: Lang): void {
 function syncPressedState(): void {
   const lang = getCurrentLang();
   const buttons = document.querySelectorAll<HTMLButtonElement>(
-    '[data-lang-toggle-root] button[data-lang-option]'
+    '[data-lang-toggle-root] button[data-lang-option]',
   );
   buttons.forEach((btn) => {
     const isActive = btn.dataset.langOption === lang;
@@ -50,7 +50,7 @@ function initLangToggle(): void {
   syncPressedState();
 
   const buttons = document.querySelectorAll<HTMLButtonElement>(
-    '[data-lang-toggle-root] button[data-lang-option]'
+    '[data-lang-toggle-root] button[data-lang-option]',
   );
   buttons.forEach((btn) => {
     btn.addEventListener('click', () => {

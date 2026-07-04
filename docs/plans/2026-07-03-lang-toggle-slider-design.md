@@ -13,16 +13,16 @@ Reemplazar el toggle actual por un **segmented control** con dos botones (uno po
 
 ## Decisiones tomadas
 
-| Pregunta | Decisión | Razón |
-| --- | --- | --- |
-| ¿Semántica del control? | Dos `<button>` con `aria-pressed` (segmented control) | Más accesible que un único botón con label dinámico: el screen reader anuncia el estado de cada opción. |
-| ¿Qué hace el click? | Setea el idioma (no alterna) | Predecible: si el sitio está en EN y querés EN, clickeás EN y queda en EN. |
-| ¿Cómo se modela el label? | `langToggle: { es: "ES", en: "EN" }` en `hero.json` | Encaja con el shape bilingüe del resto del archivo. |
-| ¿Cómo se implementa el indicador? | Un único `<span>` con `position: absolute`, `transform: translateX(0\|100%)` animado por CSS leyendo `html[data-lang]` | Un solo elemento, animación performante, sin JS para el efecto visual. |
-| ¿Default? | `es` (sin cambios, ya lo era por ADR-003) | — |
-| ¿Color del indicador? | `surface-2` + `border-strong`, sin accent | Aplica regla de escasez: el accent se reserva para hover/active. El indicador deslizante **es** el evento visual del click. |
-| ¿Sistema bilingüe (ADR-003)? | **No se toca** | El `data-lang` en `html` sigue siendo la única fuente. El control solo cambia su presentación. |
-| ¿Script anti-flash (BaseLayout)? | **No se toca** | Sigue seteando `data-lang` antes del primer paint. El indicador se posiciona correcto desde el inicio. |
+| Pregunta                          | Decisión                                                                                                               | Razón                                                                                                                       |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| ¿Semántica del control?           | Dos `<button>` con `aria-pressed` (segmented control)                                                                  | Más accesible que un único botón con label dinámico: el screen reader anuncia el estado de cada opción.                     |
+| ¿Qué hace el click?               | Setea el idioma (no alterna)                                                                                           | Predecible: si el sitio está en EN y querés EN, clickeás EN y queda en EN.                                                  |
+| ¿Cómo se modela el label?         | `langToggle: { es: "ES", en: "EN" }` en `hero.json`                                                                    | Encaja con el shape bilingüe del resto del archivo.                                                                         |
+| ¿Cómo se implementa el indicador? | Un único `<span>` con `position: absolute`, `transform: translateX(0\|100%)` animado por CSS leyendo `html[data-lang]` | Un solo elemento, animación performante, sin JS para el efecto visual.                                                      |
+| ¿Default?                         | `es` (sin cambios, ya lo era por ADR-003)                                                                              | —                                                                                                                           |
+| ¿Color del indicador?             | `surface-2` + `border-strong`, sin accent                                                                              | Aplica regla de escasez: el accent se reserva para hover/active. El indicador deslizante **es** el evento visual del click. |
+| ¿Sistema bilingüe (ADR-003)?      | **No se toca**                                                                                                         | El `data-lang` en `html` sigue siendo la única fuente. El control solo cambia su presentación.                              |
+| ¿Script anti-flash (BaseLayout)?  | **No se toca**                                                                                                         | Sigue seteando `data-lang` antes del primer paint. El indicador se posiciona correcto desde el inicio.                      |
 
 ## Cambios
 
@@ -41,9 +41,9 @@ Primitivo compartido. Recibe `labels: { es: string; en: string }` y `class?: str
 <div
   role="group"
   aria-label="Idioma"
-  class="lang-toggle relative inline-flex rounded-2xl border border-border bg-surface/80 p-1 {class}"
+  class="lang-toggle border-border bg-surface/80 {class} relative inline-flex rounded-2xl border p-1"
 >
-  <span aria-hidden="true" class="lang-toggle__indicator ..." />
+  <span aria-hidden="true" class="lang-toggle__indicator ..."></span>
   <button type="button" data-lang="es" aria-pressed="true" class="...">{labels.es}</button>
   <button type="button" data-lang="en" aria-pressed="false" class="...">{labels.en}</button>
 </div>
