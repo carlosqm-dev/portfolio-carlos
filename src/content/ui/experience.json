@@ -1,0 +1,20 @@
+{
+  "title": { "es": "Experiencia", "en": "Experience" },
+  "laboral": { "es": "Laboral", "en": "Work" },
+  "profesional": { "es": "Profesional", "en": "Education" },
+  "presente": { "es": "Presente", "en": "Present" },
+  "meses": {
+    "01": { "es": "Enero", "en": "January" },
+    "02": { "es": "Febrero", "en": "February" },
+    "03": { "es": "Marzo", "en": "March" },
+    "04": { "es": "Abril", "en": "April" },
+    "05": { "es": "Mayo", "en": "May" },
+    "06": { "es": "Junio", "en": "June" },
+    "07": { "es": "Julio", "en": "July" },
+    "08": { "es": "Agosto", "en": "August" },
+    "09": { "es": "Septiembre", "en": "September" },
+    "10": { "es": "Octubre", "en": "October" },
+    "11": { "es": "Noviembre", "en": "November" },
+    "12": { "es": "Diciembre", "en": "December" }
+  }
+}

@@ -1,14 +1,15 @@
 ---
 /**
- * Home. Por ahora: Header + Hero + Stack + Proyectos (paso 5 del orden de
- * construcción, ver docs/DECISIONS.md). Las secciones Experiencia/Sobre mí
- * se agregan luego con sus ids.
+ * Home. Por ahora: Header + Hero + Stack + Proyectos + Experiencia (paso 6
+ * del orden de construcción, ver docs/DECISIONS.md). La sección Sobre mí
+ * se agrega luego con su id.
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/features/header/Header.astro';
 import Hero from '@/features/hero/Hero.astro';
 import StackSection from '@/features/stack/StackSection.astro';
 import ProjectsSection from '@/features/projects/ProjectsSection.astro';
+import ExperienceSection from '@/features/experience/ExperienceSection.astro';
 ---
 
 <BaseLayout
@@ -21,6 +22,7 @@ import ProjectsSection from '@/features/projects/ProjectsSection.astro';
       <Hero />
       <StackSection />
       <ProjectsSection />
+      <ExperienceSection />
     </main>
   </div>
 

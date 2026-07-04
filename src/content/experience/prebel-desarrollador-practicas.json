@@ -1,0 +1,27 @@
+{
+  "tipo": "laboral",
+  "empresa": "Prebel S.A",
+  "rol": { "es": "Desarrollador de Software (Prácticas)", "en": "Software Developer (Internship)" },
+  "fechaInicio": "2025-01",
+  "fechaFin": "2025-07",
+  "lugar": "Medellín, Colombia",
+  "orden": 1,
+  "logros": [
+    {
+      "es": "Diseñé e implementé bases de datos en SQL Server para asegurar la integridad de la información.",
+      "en": "Designed and implemented SQL Server databases to ensure data integrity."
+    },
+    {
+      "es": "Desarrollé scripts de automatización en Python para la generación de informes y visualizaciones en Power BI.",
+      "en": "Developed Python automation scripts to generate reports and Power BI visualizations."
+    },
+    {
+      "es": "Elaboré documentación técnica detallada para facilitar el mantenimiento y escalabilidad de los sistemas.",
+      "en": "Wrote detailed technical documentation to ease system maintenance and scalability."
+    },
+    {
+      "es": "Gestioné la integración con ERP SAP para el acceso y flujo de información crítica del negocio.",
+      "en": "Managed the SAP ERP integration for access to and flow of critical business information."
+    }
+  ]
+}

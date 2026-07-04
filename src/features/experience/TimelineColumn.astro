@@ -1,0 +1,32 @@
+---
+/**
+ * Una columna de la sección Experiencia (Laboral o Profesional).
+ * La línea vertical de la timeline es continua a nivel de columna
+ * (border-l/r en la lista); cada TimelineItem solo dibuja su punto (dot).
+ */
+import type { CollectionEntry } from 'astro:content';
+import T from '@/components/ui/T.astro';
+import TimelineItem from './TimelineItem.astro';
+
+interface Props {
+  label: { es: string; en: string };
+  entries: CollectionEntry<'experience'>[];
+  side: 'left' | 'right';
+}
+
+const { label, entries, side } = Astro.props;
+const isRight = side === 'right';
+
+// En mobile ambas columnas apilan con el riel a la izquierda (ver ADR-010);
+// solo en md+ la columna derecha espeja el riel hacia su borde derecho.
+const listClass = isRight
+  ? 'border-border flex flex-col gap-8 border-l md:border-l-0 md:border-r'
+  : 'border-border flex flex-col gap-8 border-l';
+---
+
+<div class={isRight ? 'md:pl-8' : 'md:pr-8'}>
+  <T as="h3" t={label} class="text-text-primary mb-6 text-lg font-semibold" />
+  <ol class={listClass}>
+    {entries.map((entry) => <TimelineItem entry={entry} side={side} />)}
+  </ol>
+</div>

@@ -109,7 +109,8 @@ const experience = defineCollection({
     tipo: z.enum(['laboral', 'profesional']),
     empresa: z.string(),
     rol: localized,
-    descripcion: localized,
+    // Logros en bullets — solo laboral. Educación no los trae.
+    logros: z.array(localized).optional(),
     fechaInicio: z.string(), // ISO 8601 (YYYY-MM)
     fechaFin: z.string().nullable(), // null = "actualidad"
     lugar: z.string().optional(),

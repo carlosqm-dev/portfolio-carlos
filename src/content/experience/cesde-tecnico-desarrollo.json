@@ -1,0 +1,12 @@
+{
+  "tipo": "profesional",
+  "empresa": "Instituto CESDE",
+  "rol": {
+    "es": "Técnico Asistente en Desarrollo de Software",
+    "en": "Software Development Technician"
+  },
+  "fechaInicio": "2024-01",
+  "fechaFin": "2025-06",
+  "lugar": "Bello, Colombia",
+  "orden": 1
+}

@@ -1,0 +1,27 @@
+{
+  "tipo": "laboral",
+  "empresa": "Prebel S.A",
+  "rol": { "es": "Auxiliar de automatizaciones", "en": "Automation Assistant" },
+  "fechaInicio": "2025-07",
+  "fechaFin": "2026-01",
+  "lugar": "Medellín, Colombia",
+  "orden": 0,
+  "logros": [
+    {
+      "es": "Lideré la automatización de procesos en el área de planeación financiera, eliminando tareas operativas mediante scripts de Python y SQL.",
+      "en": "Led process automation in the financial planning area, eliminating operational tasks through Python and SQL scripts."
+    },
+    {
+      "es": "Migré procesos manuales de Excel a SQL Server, reduciendo el tiempo de procesamiento de los datos de 2 horas a 10 minutos.",
+      "en": "Migrated manual Excel processes to SQL Server, cutting data processing time from 2 hours to 10 minutes."
+    },
+    {
+      "es": "Integré resultados en tableros de Power BI para facilitar la toma de decisiones estratégicas.",
+      "en": "Integrated results into Power BI dashboards to support strategic decision-making."
+    },
+    {
+      "es": "Optimicé la extracción de datos clave mediante la implementación de vistas CDS conectadas al ERP SAP.",
+      "en": "Optimized key data extraction by implementing CDS views connected to the SAP ERP."
+    }
+  ]
+}
