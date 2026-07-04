@@ -1,8 +1,7 @@
 ---
 /**
- * Home. Por ahora: Header + Hero + Stack + Proyectos + Experiencia (paso 6
- * del orden de construcción, ver docs/DECISIONS.md). La sección Sobre mí
- * se agrega luego con su id.
+ * Home: Header + Hero + Stack + Proyectos + Experiencia + Sobre mí
+ * (orden de construcción completo, ver docs/DECISIONS.md).
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/features/header/Header.astro';
@@ -10,6 +9,7 @@ import Hero from '@/features/hero/Hero.astro';
 import StackSection from '@/features/stack/StackSection.astro';
 import ProjectsSection from '@/features/projects/ProjectsSection.astro';
 import ExperienceSection from '@/features/experience/ExperienceSection.astro';
+import AboutSection from '@/features/about/AboutSection.astro';
 ---
 
 <BaseLayout
@@ -23,6 +23,7 @@ import ExperienceSection from '@/features/experience/ExperienceSection.astro';
       <StackSection />
       <ProjectsSection />
       <ExperienceSection />
+      <AboutSection />
     </main>
   </div>
 
@@ -30,5 +31,6 @@ import ExperienceSection from '@/features/experience/ExperienceSection.astro';
     import '@/scripts/lang-toggle.ts';
     import '@/scripts/hamburger.ts';
     import '@/features/hero/copy-email.ts';
+    import '@/features/about/photo-carousel.ts';
   </script>
 </BaseLayout>

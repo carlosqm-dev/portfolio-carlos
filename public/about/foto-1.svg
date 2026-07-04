@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+  <rect width="800" height="800" fill="#141416"/>
+  <rect x="1" y="1" width="798" height="798" fill="none" stroke="#26262B" stroke-width="2"/>
+  <text x="400" y="410" fill="#71717A" font-family="JetBrains Mono, monospace" font-size="28" text-anchor="middle">foto-1</text>
+</svg>

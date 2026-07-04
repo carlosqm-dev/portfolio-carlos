@@ -129,12 +129,15 @@ const about = defineCollection({
   schema: z.object({
     descripcion: localized,
     hobbies: z.array(localized).optional(),
-    fotos: z.array(
-      z.object({
-        src: z.string(), // ruta a la imagen
-        alt: localized,
-      }),
-    ),
+    // El stack del carrusel necesita al menos 3 fotos (activa + laterales)
+    fotos: z
+      .array(
+        z.object({
+          src: z.string(), // ruta a la imagen
+          alt: localized,
+        }),
+      )
+      .min(3),
   }),
 });
 

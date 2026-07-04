@@ -1,0 +1,98 @@
+---
+/**
+ * Carrusel de fotos en stack (ver ADR-010): la activa al frente, anterior y
+ * siguiente asomando detrás. Solo loop automático, sin interacción — el
+ * estado de cada foto vive en `data-state` (active | prev | next | hidden);
+ * photo-carousel.ts rota el índice y el CSS de abajo hace el movimiento.
+ *
+ * Profundidad por luminosidad, no por sombra (DESIGN.md): las laterales se
+ * atenúan con brightness, sin drop-shadows ni accent.
+ */
+import { getEntry } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  fotos: CollectionEntry<'about'>['data']['fotos'];
+}
+
+const { fotos } = Astro.props;
+
+const ui = await getEntry('ui', 'about');
+const { carouselLabel } = ui.data as {
+  carouselLabel: { es: string; en: string };
+};
+
+// Estado inicial renderizado en servidor para que el stack se vea bien
+// antes de que cargue el script (y aunque JS esté deshabilitado).
+function estadoInicial(i: number) {
+  if (i === 0) return 'active';
+  if (i === 1) return 'next';
+  if (i === fotos.length - 1) return 'prev';
+  return 'hidden';
+}
+---
+
+<div
+  class="mx-auto w-full max-w-md"
+  data-photo-carousel
+  role="group"
+  aria-roledescription="carrusel"
+  aria-label={carouselLabel.es}
+>
+  <ul class="relative aspect-square">
+    {
+      fotos.map((foto, i) => (
+        <li data-carousel-item data-state={estadoInicial(i)}>
+          <img
+            src={foto.src}
+            alt={foto.alt.es}
+            loading="lazy"
+            class="border-accent h-full w-full rounded-2xl border object-cover"
+          />
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  /* inset 15% sobre contenedor cuadrado ⇒ cada foto es un cuadrado 1:1 */
+  [data-carousel-item] {
+    position: absolute;
+    inset: 15%;
+    transition:
+      transform 0.5s ease,
+      filter 0.5s ease,
+      opacity 0.5s ease;
+  }
+
+  [data-carousel-item][data-state='active'] {
+    z-index: 3;
+  }
+
+  [data-carousel-item][data-state='prev'],
+  [data-carousel-item][data-state='next'] {
+    z-index: 2;
+    filter: brightness(0.5);
+  }
+
+  [data-carousel-item][data-state='prev'] {
+    transform: translateX(-32%) scale(0.85);
+  }
+
+  [data-carousel-item][data-state='next'] {
+    transform: translateX(32%) scale(0.85);
+  }
+
+  [data-carousel-item][data-state='hidden'] {
+    z-index: 1;
+    transform: scale(0.7);
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-carousel-item] {
+      transition: none;
+    }
+  }
+</style>
