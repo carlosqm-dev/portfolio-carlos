@@ -1,4 +1,5 @@
-import { defineCollection, reference } from 'astro:content';
+import { readdirSync, readFileSync } from 'node:fs';
+import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
@@ -39,6 +40,24 @@ const stack = defineCollection({
 });
 
 /**
+ * Catálogo plano de IDs de tecnología válidos, leído síncronamente con
+ * node:fs en vez de `getCollection('stack')`: el config de la colección
+ * se evalúa antes de que exista el Content Layer, así que no hay forma de
+ * usar la API async de astro:content acá arriba. Un proyecto puede cruzar
+ * categorías (ej: usar 1 tecnología de frontend y 2 de backend), por eso
+ * se aplana `tecnologias[].id` de todos los archivos en un único Set.
+ */
+const stackDir = new URL('./content/stack/', import.meta.url);
+const validTechIds = new Set(
+  readdirSync(stackDir)
+    .filter((file) => file.endsWith('.json'))
+    .flatMap((file) => {
+      const contenido = JSON.parse(readFileSync(new URL(file, stackDir), 'utf-8'));
+      return (contenido.tecnologias as Array<{ id: string }>).map((tech) => tech.id);
+    }),
+);
+
+/**
  * Projects — entrada principal del portafolio.
  * Ver ADR-002, ADR-006, ADR-007.
  *
@@ -51,7 +70,14 @@ const projects = defineCollection({
     titulo: localized,
     resumen: localized, // Bajada corta para el grid
     descripcion: localized, // Descripción completa para la página de detalle
-    stack: z.array(reference('stack')), // IDs del catálogo, validados
+    imagen: z.object({ src: z.string(), alt: localized }), // Cover del grid
+    // IDs individuales de tecnología, no referencias a categorías completas:
+    // un proyecto cruza categorías (ver comentario de validTechIds arriba).
+    stack: z.array(
+      z.string().refine((id) => validTechIds.has(id), {
+        message: 'id de tecnología no encontrado en src/content/stack/',
+      }),
+    ),
     // String Mermaid para el diagrama de arquitectura
     // Ver ADR-007: NO incluir dirección; el script la inyecta.
     diagrama: z.string().optional(),
@@ -63,6 +89,11 @@ const projects = defineCollection({
       .optional(),
     destacado: z.boolean().default(false),
     orden: z.number().int().min(0),
+    // --- Campos opcionales para la página de detalle (fase 2, ver ADR-006) ---
+    estado: z.enum(['produccion', 'desarrollo', 'archivado']).optional(),
+    galeria: z.array(z.object({ src: z.string(), alt: localized })).optional(),
+    decisionesClave: z.array(z.object({ decision: localized, porQue: localized })).optional(),
+    desafios: z.array(z.object({ titulo: localized, solucion: localized })).optional(),
   }),
 });
 

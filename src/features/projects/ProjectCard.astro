@@ -1,0 +1,57 @@
+---
+/**
+ * Card de un proyecto en el grid de la sección Proyectos.
+ * El link "Más información" apunta a /proyectos/{slug}, ruta que recién
+ * se construye en la fase 2 (ver ADR-006) — por ahora da 404, esperado.
+ */
+import { getEntry } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Icon from '@/components/ui/Icon.astro';
+import T from '@/components/ui/T.astro';
+
+interface Props {
+  entry: CollectionEntry<'projects'>;
+}
+
+const { entry } = Astro.props;
+const { titulo, resumen, imagen, links } = entry.data;
+
+const ui = await getEntry('ui', 'projects');
+const { masInformacion, github } = ui.data as {
+  masInformacion: { es: string; en: string };
+  github: { es: string; en: string };
+};
+---
+
+<article
+  class="border-border bg-surface hover:border-accent rounded-2xl border p-6 transition-colors"
+>
+  <img
+    src={imagen.src}
+    alt={imagen.alt.es}
+    class="mb-4 aspect-video w-full rounded-xl object-cover"
+  />
+  <T as="h3" t={titulo} class="text-text-primary mb-6 text-lg font-semibold" />
+  <T as="p" t={resumen} class="text-text-secondary mb-4 text-sm" />
+  <div class="flex items-center justify-between">
+    {
+      links?.repo && (
+        <a
+          href={links.repo}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-text-secondary hover:text-accent inline-flex items-center gap-2 text-sm transition-colors"
+        >
+          <Icon name="simple-icons:github" size={18} />
+          <T t={github} />
+        </a>
+      )
+    }
+    <a
+      href={`/proyectos/${entry.id}`}
+      class="text-accent hover:text-accent-hover text-sm font-medium transition-colors"
+    >
+      <T t={masInformacion} />
+    </a>
+  </div>
+</article>

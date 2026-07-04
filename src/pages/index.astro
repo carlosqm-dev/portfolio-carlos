@@ -1,13 +1,14 @@
 ---
 /**
- * Home. Por ahora: Header + Hero + Stack (paso 4 del orden de construcción,
- * ver docs/DECISIONS.md). Las secciones Proyectos/Experiencia/Sobre mí
- * se agregan luego con sus ids (#proyectos, etc.).
+ * Home. Por ahora: Header + Hero + Stack + Proyectos (paso 5 del orden de
+ * construcción, ver docs/DECISIONS.md). Las secciones Experiencia/Sobre mí
+ * se agregan luego con sus ids.
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/features/header/Header.astro';
 import Hero from '@/features/hero/Hero.astro';
 import StackSection from '@/features/stack/StackSection.astro';
+import ProjectsSection from '@/features/projects/ProjectsSection.astro';
 ---
 
 <BaseLayout
@@ -19,6 +20,7 @@ import StackSection from '@/features/stack/StackSection.astro';
     <main class="mx-auto max-w-6xl px-4 py-12 md:py-20">
       <Hero />
       <StackSection />
+      <ProjectsSection />
     </main>
   </div>
 

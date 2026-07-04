@@ -1,0 +1,22 @@
+---
+/**
+ * Sección Proyectos — paso 5 del orden de construcción
+ * (ver docs/DECISIONS.md). Una card por entrada de la colección `projects`,
+ * ordenadas por `orden` (ADR-002). Grid de 2 columnas, ver ADR-006.
+ */
+import { getCollection, getEntry } from 'astro:content';
+import T from '@/components/ui/T.astro';
+import ProjectCard from './ProjectCard.astro';
+
+const ui = await getEntry('ui', 'projects');
+const { title } = ui.data as { title: { es: string; en: string } };
+
+const proyectos = (await getCollection('projects')).sort((a, b) => a.data.orden - b.data.orden);
+---
+
+<section id="proyectos" class="mt-24 scroll-mt-24 md:mt-32">
+  <T as="h2" t={title} class="text-text-primary mb-8 text-3xl font-semibold" />
+  <div class="grid gap-6 md:grid-cols-2">
+    {proyectos.map((entry) => <ProjectCard entry={entry} />)}
+  </div>
+</section>

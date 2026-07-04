@@ -1,0 +1,16 @@
+{
+  "title": { "es": "Proyectos", "en": "Projects" },
+  "masInformacion": { "es": "Más información →", "en": "More information →" },
+  "github": { "es": "GitHub", "en": "GitHub" },
+  "web": { "es": "Web", "en": "Live demo" },
+  "volver": { "es": "← Volver", "en": "← Back" },
+  "estado": {
+    "produccion": { "es": "En producción", "en": "In production" },
+    "desarrollo": { "es": "En desarrollo", "en": "In development" },
+    "archivado": { "es": "Archivado", "en": "Archived" }
+  },
+  "stackTitulo": { "es": "Stack tecnológico", "en": "Tech stack" },
+  "arquitecturaTitulo": { "es": "Arquitectura — el porqué", "en": "Architecture — the why" },
+  "decisionesClaveTitulo": { "es": "Decisiones clave", "en": "Key decisions" },
+  "desafiosTitulo": { "es": "Desafíos y soluciones", "en": "Challenges and solutions" }
+}
