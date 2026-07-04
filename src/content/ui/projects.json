@@ -10,7 +10,7 @@
     "archivado": { "es": "Archivado", "en": "Archived" }
   },
   "stackTitulo": { "es": "Stack tecnológico", "en": "Tech stack" },
-  "arquitecturaTitulo": { "es": "Arquitectura — el porqué", "en": "Architecture — the why" },
+  "arquitecturaTitulo": { "es": "Arquitectura", "en": "Architecture" },
   "decisionesClaveTitulo": { "es": "Decisiones clave", "en": "Key decisions" },
   "desafiosTitulo": { "es": "Desafíos y soluciones", "en": "Challenges and solutions" }
 }

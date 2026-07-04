@@ -1,0 +1,66 @@
+{
+  "titulo": { "es": "D'Fruta Madre", "en": "D'Fruta Madre" },
+  "resumen": {
+    "es": "Página web de marca y mini-app de pedidos por WhatsApp para D'Fruta Madre.",
+    "en": "Website and mini-app for D'Fruta Madre's fresh cream delivery service, available via WhatsApp."
+  },
+  "descripcion": {
+    "es": "D'Fruta Madre vende fresas con crema y derivados, y toma todos sus pedidos por WhatsApp. Este proyecto convierte ese flujo manual en uno guiado: la página convence (landing de marca con menú, prueba social y contacto) y luego construye el pedido completo con 'el armador' — un catálogo con todo el menú a domicilio donde los productos configurables se arman con un wizard paso a paso y los directos se agregan por cantidad. El resumen llega a WhatsApp listo para enviar. La mayoría de los usuarios llega desde el celular (QR en el punto físico / Instagram), por eso todo el diseño es mobile-first y el contenido está 100 % en español.",
+    "en": "D'Fruta Madre sells strawberries with cream and related products, and takes all its orders via WhatsApp. This project transforms that manual process into a guided one: the website draws customers in (a branded landing page with a menu, social proof, and contact information) and then builds the complete order using “the builder”—a catalog featuring the entire delivery menu where customizable products are put together using a step-by-step wizard and non-customizable items are added by quantity. The order summary is sent to WhatsApp, ready to be delivered. Most users access the site from their cell phones (via a QR code at the physical location or Instagram), which is why the entire design is mobile-first and the content is 100% in Spanish."
+  },
+  "imagen": {
+    "src": "/projects/dfrutamadre/cover.png",
+    "alt": { "es": "Portada del proyecto demo", "en": "Demo project cover" }
+  },
+  "stack": ["react", "vite", "typescript", "tailwind"],
+  "estado": "produccion",
+  "galeria": [
+    {
+      "src": "/projects/dfrutamadre/gallery-1.png",
+      "alt": { "es": "Captura 1 del proyecto demo", "en": "Demo project screenshot 1" }
+    },
+    {
+      "src": "/projects/dfrutamadre/gallery-2.png",
+      "alt": { "es": "Captura 2 del proyecto demo", "en": "Demo project screenshot 2" }
+    }
+  ],
+  "decisionesClave": [
+    {
+      "decision": {
+        "es": "Motor de armado genérico en lugar de flujos por producto",
+        "en": "Generic builder engine over per-product flows"
+      },
+      "porQue": {
+        "es": "Cada producto tiene un proceso de armado distinto (pasos, reglas, precio); modelarlo como configuración de datos que el motor renderiza evita duplicar UI y lógica con cada producto nuevo.",
+        "en": "Each product has a distinct assembly process (steps, rules, pricing); modeling it as data configuration the engine can render avoids duplicating UI and logic for every new product."
+      }
+    },
+    {
+      "decision": {
+        "es": "Sin backend — pedido entregado por WhatsApp",
+        "en": "No backend — order handoff via WhatsApp"
+      },
+      "porQue": {
+        "es": "El negocio ya opera por WhatsApp; un checkout propio con servidor y pagos online agregaría infraestructura y fricción sin valor en esta etapa.",
+        "en": "The business already operates through WhatsApp; a custom checkout with a server and online payments would add infrastructure and friction without value at this stage."
+      }
+    },
+    {
+      "decision": {
+        "es": "Navegación por estado en memoria en lugar de router",
+        "en": "In-memory state navigation over a router"
+      },
+      "porQue": {
+        "es": "El flujo es un funnel lineal de una sola sesión, sin necesidad de deep-linking ni historial navegable entre pasos.",
+        "en": "The flow is a single-session linear funnel with no need for deep-linking or navigable history between steps."
+      }
+    }
+  ],
+  "diagrama": "subgraph UI\n        A[\"app/<br/>App.tsx — navegación por estado\"]\n        B[\"sections/<br/>landing de marca\"]\n        C[\"features/armador/<br/>catálogo + wizard + carrito + entrega\"]\n        D[\"shared/<br/>ui/ y lib/\"]\n    end\n    subgraph \"Dominio (cero React)\"\n        E[\"domain/builder/<br/>types · pricing · validation\"]\n        F[\"domain/menu/<br/>productos como datos\"]\n    end\n    A --> B\n    A --> C\n    B --> D\n    C --> D\n    B --> F\n    C --> E\n    C --> F\n    F --> E\n    C --> G[\"WhatsApp<br/>wa.me/57300...?text=...\"]",
+  "links": {
+    "repo": "https://github.com/carlosqm-dev/dfruta-madre-landing",
+    "demo": "https://dfrutamadre.hydreon.com.co"
+  },
+  "destacado": false,
+  "orden": 0
+}
