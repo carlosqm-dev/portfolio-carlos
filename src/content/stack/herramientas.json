@@ -1,0 +1,17 @@
+{
+  "nombre": { "es": "Herramientas", "en": "Tools" },
+  "orden": 3,
+  "tecnologias": [
+    { "id": "git", "nombre": "Git", "icono": "simple-icons:git" },
+    { "id": "github", "nombre": "GitHub", "icono": "simple-icons:github" },
+    { "id": "docker", "nombre": "Docker", "icono": "simple-icons:docker" },
+    { "id": "postman", "nombre": "Postman", "icono": "simple-icons:postman" },
+    { "id": "claude-code", "nombre": "Claude Code", "icono": "simple-icons:claudecode" },
+    { "id": "opencode", "nombre": "OpenCode", "icono": "simple-icons:opencode" },
+    { "id": "vscode", "nombre": "VSCode", "icono": "simple-icons:visualstudiocode" },
+    { "id": "zed", "nombre": "Zed", "icono": "simple-icons:zedindustries" },
+    { "id": "cursor", "nombre": "Cursor", "icono": "simple-icons:cursor" },
+    { "id": "excalidraw", "nombre": "Excalidraw", "icono": "simple-icons:excalidraw" },
+    { "id": "figma", "nombre": "Figma", "icono": "simple-icons:figma" }
+  ]
+}

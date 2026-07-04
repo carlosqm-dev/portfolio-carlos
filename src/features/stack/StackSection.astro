@@ -1,0 +1,22 @@
+---
+/**
+ * Sección Stack tecnológico — paso 4 del orden de construcción
+ * (ver docs/DECISIONS.md). Una card por categoría de la colección `stack`,
+ * ordenadas por `orden` (ADR-004).
+ */
+import { getCollection, getEntry } from 'astro:content';
+import T from '@/components/ui/T.astro';
+import CategoryCard from './CategoryCard.astro';
+
+const ui = await getEntry('ui', 'stack');
+const { title } = ui.data as { title: { es: string; en: string } };
+
+const categorias = (await getCollection('stack')).sort((a, b) => a.data.orden - b.data.orden);
+---
+
+<section id="stack" class="mt-24 scroll-mt-24 md:mt-32">
+  <T as="h2" t={title} class="text-text-primary mb-8 text-3xl font-semibold" />
+  <div class="grid gap-6 md:grid-cols-2">
+    {categorias.map((entry) => <CategoryCard entry={entry} />)}
+  </div>
+</section>

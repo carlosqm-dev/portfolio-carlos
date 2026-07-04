@@ -1,0 +1,12 @@
+{
+  "nombre": { "es": "Backend", "en": "Backend" },
+  "orden": 0,
+  "tecnologias": [
+    { "id": "python", "nombre": "Python", "icono": "simple-icons:python" },
+    { "id": "node-js", "nombre": "Node.js", "icono": "simple-icons:nodedotjs" },
+    { "id": "express-js", "nombre": "Express.js", "icono": "simple-icons:express" },
+    { "id": "fastapi", "nombre": "FastAPI", "icono": "simple-icons:fastapi" },
+    { "id": "django", "nombre": "Django", "icono": "simple-icons:django" },
+    { "id": "flask", "nombre": "Flask", "icono": "simple-icons:flask" }
+  ]
+}
