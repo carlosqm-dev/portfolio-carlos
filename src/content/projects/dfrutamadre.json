@@ -1,8 +1,8 @@
 {
   "titulo": { "es": "D'Fruta Madre", "en": "D'Fruta Madre" },
   "resumen": {
-    "es": "Página web de marca y mini-app de pedidos por WhatsApp para D'Fruta Madre.",
-    "en": "Website and mini-app for D'Fruta Madre's fresh cream delivery service, available via WhatsApp."
+    "es": "Página web de marca y mini-app de pedidos por WhatsApp para D'Fruta Madre (negocio real ubicado en Girardota, Antioquia - Colombia).",
+    "en": "Website and mini-app for D'Fruta Madre's fresh cream delivery service, available via WhatsApp (a real bussines located in Girardota, Antioquia - Colombia)."
   },
   "descripcion": {
     "es": "D'Fruta Madre vende fresas con crema y derivados, y toma todos sus pedidos por WhatsApp. Este proyecto convierte ese flujo manual en uno guiado: la página convence (landing de marca con menú, prueba social y contacto) y luego construye el pedido completo con 'el armador' — un catálogo con todo el menú a domicilio donde los productos configurables se arman con un wizard paso a paso y los directos se agregan por cantidad. El resumen llega a WhatsApp listo para enviar. La mayoría de los usuarios llega desde el celular (QR en el punto físico / Instagram), por eso todo el diseño es mobile-first y el contenido está 100 % en español.",
@@ -10,18 +10,18 @@
   },
   "imagen": {
     "src": "/projects/dfrutamadre/cover.png",
-    "alt": { "es": "Portada del proyecto demo", "en": "Demo project cover" }
+    "alt": { "es": "Portada del proyecto", "en": "Project cover" }
   },
   "stack": ["react", "vite", "typescript", "tailwind"],
   "estado": "produccion",
   "galeria": [
     {
       "src": "/projects/dfrutamadre/gallery-1.png",
-      "alt": { "es": "Captura 1 del proyecto demo", "en": "Demo project screenshot 1" }
+      "alt": { "es": "Captura 1 del proyecto", "en": "Project screenshot 1" }
     },
     {
       "src": "/projects/dfrutamadre/gallery-2.png",
-      "alt": { "es": "Captura 2 del proyecto demo", "en": "Demo project screenshot 2" }
+      "alt": { "es": "Captura 2 del proyecto", "en": "Project screenshot 2" }
     }
   ],
   "decisionesClave": [
@@ -62,5 +62,5 @@
     "demo": "https://dfrutamadre.hydreon.com.co"
   },
   "destacado": false,
-  "orden": 0
+  "orden": 1
 }
