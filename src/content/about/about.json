@@ -1,28 +1,23 @@
 {
   "descripcion": {
-    "es": "Detrás del teclado hay una persona a la que le gusta entender cómo funcionan las cosas, no solo usarlas. Cuando no estoy programando me vas a encontrar compartiendo con mi familia, escuchando música o explorando algún lugar nuevo. Creo que el buen software lo construye gente curiosa, y esa curiosidad la entreno todos los días, dentro y fuera de la pantalla.",
-    "en": "Behind the keyboard there's someone who likes to understand how things work, not just use them. When I'm not coding you'll find me spending time with my family, listening to music, or exploring somewhere new. I believe good software is built by curious people, and I train that curiosity every day, on and off the screen."
+    "es": "Detrás del teclado hay una persona a la que le gusta entender cómo funcionan las cosas, no solo usarlas. Cuando no estoy programando, comparto con mi familia, escucho música o exploro lugares y experiencias nuevas. Creo que el buen software lo construye gente curiosa, y esa curiosidad la entreno todos los días, dentro y fuera de la pantalla.",
+    "en": "Behind the keyboard there's someone who likes to understand how things work, not just use them. When I'm not programming, I spend time with my family, listen to music, or explore new places and experiences. I believe good software is built by curious people, and I train that curiosity every day, on and off the screen."
   },
-  "hobbies": [
-    { "es": "Música", "en": "Music" },
-    { "es": "Viajar", "en": "Traveling" },
-    { "es": "Aprender algo nuevo", "en": "Learning something new" }
-  ],
-  "fotos": [
+  "fotos": [  
     {
-      "src": "/about/foto-1.svg",
+      "src": "/about/photo-1.jpeg",
       "alt": { "es": "Foto personal 1", "en": "Personal photo 1" }
     },
     {
-      "src": "/about/foto-2.svg",
+      "src": "/about/photo-2.jpeg",
       "alt": { "es": "Foto personal 2", "en": "Personal photo 2" }
     },
     {
-      "src": "/about/foto-3.svg",
+      "src": "/about/photo-3.jpeg",
       "alt": { "es": "Foto personal 3", "en": "Personal photo 3" }
     },
     {
-      "src": "/about/foto-4.svg",
+      "src": "/about/photo-4.jpeg",
       "alt": { "es": "Foto personal 4", "en": "Personal photo 4" }
     }
   ]
