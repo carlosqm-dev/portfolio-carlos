@@ -12,5 +12,6 @@
   "stackTitulo": { "es": "Stack tecnológico", "en": "Tech stack" },
   "arquitecturaTitulo": { "es": "Arquitectura", "en": "Architecture" },
   "decisionesClaveTitulo": { "es": "Decisiones clave", "en": "Key decisions" },
-  "desafiosTitulo": { "es": "Desafíos y soluciones", "en": "Challenges and solutions" }
+  "desafiosTitulo": { "es": "Desafíos y soluciones", "en": "Challenges and solutions" },
+  "cerrarVisor": { "es": "Cerrar", "en": "Close" }
 }

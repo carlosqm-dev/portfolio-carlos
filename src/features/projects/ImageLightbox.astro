@@ -1,0 +1,68 @@
+---
+/**
+ * Visor (lightbox) para ampliar una imagen del detalle a pantalla completa.
+ * Ver ADR-006: el detalle es ruta (no modal); esto NO navega, solo amplía
+ * una imagen sobre un overlay. Se renderiza una vez por página; el
+ * comportamiento vive en image-lightbox.ts y la animación en el <style> de acá.
+ */
+import { getEntry } from 'astro:content';
+import Icon from '@/components/ui/Icon.astro';
+import T from '@/components/ui/T.astro';
+
+const ui = await getEntry('ui', 'projects');
+const { cerrarVisor } = ui.data as { cerrarVisor: { es: string; en: string } };
+---
+
+<div
+  data-lightbox
+  data-open="false"
+  role="dialog"
+  aria-modal="true"
+  class="fixed inset-0 z-[100] flex items-center justify-center p-4"
+>
+  <button
+    data-lightbox-close
+    type="button"
+    class="bg-surface/80 text-text-primary hover:text-accent absolute top-4 right-4 rounded-full p-2 transition-colors"
+  >
+    <Icon name="local:close" size={26} />
+    <T as="span" t={cerrarVisor} class="sr-only" />
+  </button>
+
+  <img data-lightbox-img alt="" class="max-h-[90vh] max-w-[90vw] rounded-lg object-contain" />
+</div>
+
+<style>
+  /* Animación keyed off [data-open]; el JS solo togglea el atributo.
+     visibility:hidden saca el visor del tab-order mientras está cerrado. */
+  [data-lightbox] {
+    background: var(--overlay);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.2s ease,
+      visibility 0.2s ease;
+  }
+
+  [data-lightbox-img] {
+    transform: scale(0.96);
+    transition: transform 0.2s ease;
+  }
+
+  [data-lightbox][data-open='true'] {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  [data-lightbox][data-open='true'] [data-lightbox-img] {
+    transform: scale(1);
+  }
+
+  /* Respeta la preferencia de menos animación: el visor funciona igual, sin motion. */
+  @media (prefers-reduced-motion: reduce) {
+    [data-lightbox],
+    [data-lightbox-img] {
+      transition: none;
+    }
+  }
+</style>

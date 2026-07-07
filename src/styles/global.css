@@ -45,6 +45,8 @@
   --focus-ring: rgba(31, 156, 255, 0.5);
   --selection: rgba(31, 156, 255, 0.2);
   --grid-line: rgba(255, 255, 255, 0.03);
+  /* Scrim del lightbox de imágenes — oscurece el fondo al ampliar una foto */
+  --overlay: rgba(10, 10, 11, 0.92);
 }
 
 /* Reset mínimo y base */

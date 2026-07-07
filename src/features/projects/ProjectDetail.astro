@@ -11,6 +11,7 @@ import ProjectLinks from './ProjectLinks.astro';
 import ProjectStack from './ProjectStack.astro';
 import ProjectArchitecture from './ProjectArchitecture.astro';
 import ProjectChallenges from './ProjectChallenges.astro';
+import ImageLightbox from './ImageLightbox.astro';
 
 interface Props {
   entry: CollectionEntry<'projects'>;
@@ -26,26 +27,46 @@ const { titulo, imagen, galeria, descripcion, stack, diagrama, decisionesClave, 
 
   <section class="mt-10 grid gap-8 md:mt-12 md:grid-cols-2">
     <div class="flex flex-col gap-4">
-      <img
-        src={imagen.src}
-        alt={imagen.alt.es}
-        class="aspect-video w-full rounded-2xl object-cover"
-      />
+      <button
+        type="button"
+        data-lightbox-trigger
+        data-src={imagen.src}
+        data-alt={imagen.alt.es}
+        class="block w-full cursor-zoom-in"
+      >
+        <img
+          src={imagen.src}
+          alt={imagen.alt.es}
+          class="aspect-video w-full rounded-2xl object-cover"
+        />
+      </button>
       {
         galeria && (
           <div class="grid grid-cols-2 gap-4">
             {galeria.map((foto) => (
-              <img
-                src={foto.src}
-                alt={foto.alt.es}
-                class="aspect-video w-full rounded-xl object-cover"
-              />
+              <button
+                type="button"
+                data-lightbox-trigger
+                data-src={foto.src}
+                data-alt={foto.alt.es}
+                class="block w-full cursor-zoom-in"
+              >
+                <img
+                  src={foto.src}
+                  alt={foto.alt.es}
+                  class="aspect-video w-full rounded-xl object-cover"
+                />
+              </button>
             ))}
           </div>
         )
       }
     </div>
-    <T as="p" t={descripcion} class="text-text-secondary text-base leading-relaxed whitespace-pre-line" />
+    <T
+      as="p"
+      t={descripcion}
+      class="text-text-secondary text-base leading-relaxed whitespace-pre-line"
+    />
   </section>
 
   <ProjectStack stackIds={stack} />
@@ -66,4 +87,6 @@ const { titulo, imagen, galeria, descripcion, stack, diagrama, decisionesClave, 
   <footer class="border-border mt-10 flex justify-end border-t pt-10 md:mt-12 md:pt-12">
     <ProjectLinks links={links} />
   </footer>
+
+  <ImageLightbox />
 </article>
