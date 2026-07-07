@@ -13,6 +13,7 @@
 import { getEntry } from 'astro:content';
 import Icon from '@/components/ui/Icon.astro';
 import LangToggle from '@/components/ui/LangToggle.astro';
+import T from '@/components/ui/T.astro';
 import NavLinks from './NavLinks.astro';
 
 type Localized = { es: string; en: string };
@@ -20,7 +21,7 @@ type Localized = { es: string; en: string };
 const hero = await getEntry('ui', 'hero');
 // La colección `ui` tiene shape abierto (ADR-002); tipamos lo que consumimos.
 const { brand, langToggle, nav } = hero.data as {
-  brand: string;
+  brand: Localized;
   langToggle: { es: string; en: string };
   nav: { href: string; label: Localized }[];
 };
@@ -38,7 +39,7 @@ const pill = 'rounded-2xl border border-border bg-surface/80 backdrop-blur';
       href="#top"
       class={`${pill} px-5 py-2.5 font-medium text-text-primary transition-colors hover:border-border-strong`}
     >
-      {brand}
+      <T t={brand} />
     </a>
 
     {/* Pill navegación — solo desktop */}

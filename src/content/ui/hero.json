@@ -1,5 +1,6 @@
 {
-  "brand": "Carlos Quiroz",
+  "brand": { "es": "Inicio", "en": "Home" },
+  "name": "Carlos Quiroz",
   "langToggle": { "es": "ES", "en": "EN" },
   "nav": [
     { "href": "#stack", "label": { "es": "Stack", "en": "Stack" } },

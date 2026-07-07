@@ -20,8 +20,8 @@ import T from '@/components/ui/T.astro';
 type Localized = { es: string; en: string };
 
 const hero = await getEntry('ui', 'hero');
-const { brand, social } = hero.data as {
-  brand: string;
+const { name, social } = hero.data as {
+  name: string;
   social: {
     githubUrl: string;
     linkedinUrl: string;
@@ -62,7 +62,8 @@ const iconBox =
     </ul>
 
     <p class="text-text-muted mt-5 font-mono text-xs">
-      © {year} {brand}. <T t={copyright} />
+      © {year}
+      {name}. <T t={copyright} />
     </p>
   </div>
 
