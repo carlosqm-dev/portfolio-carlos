@@ -12,57 +12,53 @@ type ProjectData = CollectionEntry<'projects'>['data'];
 
 interface Props {
   slug: string;
-  titulo: ProjectData['titulo'];
-  diagrama: ProjectData['diagrama'];
-  decisionesClave: ProjectData['decisionesClave'];
+  title: ProjectData['title'];
+  diagram: ProjectData['diagram'];
+  keyDecisions: ProjectData['keyDecisions'];
 }
 
-const { slug, titulo, diagrama, decisionesClave } = Astro.props;
+const { slug, title, diagram, keyDecisions } = Astro.props;
 
 const ui = await getEntry('ui', 'projects');
-const { arquitecturaTitulo, decisionesClaveTitulo } = ui.data as {
-  arquitecturaTitulo: { es: string; en: string };
-  decisionesClaveTitulo: { es: string; en: string };
+const { architectureTitle, keyDecisionsTitle } = ui.data as {
+  architectureTitle: { es: string; en: string };
+  keyDecisionsTitle: { es: string; en: string };
 };
 ---
 
 <section class="border-border mt-10 border-t pt-10 md:mt-12 md:pt-12">
-  <T as="h2" t={arquitecturaTitulo} class="text-text-primary mb-6 text-2xl font-semibold" />
+  <T as="h2" t={architectureTitle} class="text-text-primary mb-6 text-2xl font-semibold" />
   <div class="grid gap-8">
     {
-      diagrama && (
+      diagram && (
         <div>
           {/* Ver ADR-007: dos SVGs generados por `pnpm diagrams`, alternados por breakpoint */}
           <img
             src={`/diagrams/${slug}-desktop.svg`}
-            alt={titulo.es}
+            alt={title.es}
             class="hidden w-full rounded-xl md:block"
           />
           <img
             src={`/diagrams/${slug}-mobile.svg`}
-            alt={titulo.es}
+            alt={title.es}
             class="w-full rounded-xl md:hidden"
           />
         </div>
       )
     }
     {
-      decisionesClave && (
+      keyDecisions && (
         <div class="border-border bg-surface rounded-2xl border p-6">
-          <T
-            as="h3"
-            t={decisionesClaveTitulo}
-            class="text-text-primary mb-4 text-lg font-semibold"
-          />
+          <T as="h3" t={keyDecisionsTitle} class="text-text-primary mb-4 text-lg font-semibold" />
           <ul class="flex flex-col gap-4">
-            {decisionesClave.map((item) => (
+            {keyDecisions.map((item) => (
               <li>
                 <T
                   as="strong"
                   t={item.decision}
                   class="text-text-primary block text-sm font-medium"
                 />
-                <T as="p" t={item.porQue} class="text-text-secondary mt-1 text-sm" />
+                <T as="p" t={item.why} class="text-text-secondary mt-1 text-sm" />
               </li>
             ))}
           </ul>

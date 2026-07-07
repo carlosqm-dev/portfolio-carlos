@@ -1,12 +1,12 @@
 {
-  "nombre": { "es": "Backend", "en": "Backend" },
-  "orden": 0,
-  "tecnologias": [
-    { "id": "python", "nombre": "Python", "icono": "simple-icons:python" },
-    { "id": "node-js", "nombre": "Node.js", "icono": "simple-icons:nodedotjs" },
-    { "id": "express-js", "nombre": "Express.js", "icono": "simple-icons:express" },
-    { "id": "fastapi", "nombre": "FastAPI", "icono": "simple-icons:fastapi" },
-    { "id": "django", "nombre": "Django", "icono": "simple-icons:django" },
-    { "id": "flask", "nombre": "Flask", "icono": "simple-icons:flask" }
+  "name": { "es": "Backend", "en": "Backend" },
+  "order": 0,
+  "technologies": [
+    { "id": "python", "name": "Python", "icon": "simple-icons:python" },
+    { "id": "node-js", "name": "Node.js", "icon": "simple-icons:nodedotjs" },
+    { "id": "express-js", "name": "Express.js", "icon": "simple-icons:express" },
+    { "id": "fastapi", "name": "FastAPI", "icon": "simple-icons:fastapi" },
+    { "id": "django", "name": "Django", "icon": "simple-icons:django" },
+    { "id": "flask", "name": "Flask", "icon": "simple-icons:flask" }
   ]
 }

@@ -12,10 +12,10 @@ import { getEntry } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
-  fotos: CollectionEntry<'about'>['data']['fotos'];
+  photos: CollectionEntry<'about'>['data']['photos'];
 }
 
-const { fotos } = Astro.props;
+const { photos } = Astro.props;
 
 const ui = await getEntry('ui', 'about');
 const { carouselLabel } = ui.data as {
@@ -24,10 +24,10 @@ const { carouselLabel } = ui.data as {
 
 // Estado inicial renderizado en servidor para que el stack se vea bien
 // antes de que cargue el script (y aunque JS esté deshabilitado).
-function estadoInicial(i: number) {
+function initialState(i: number) {
   if (i === 0) return 'active';
   if (i === 1) return 'next';
-  if (i === fotos.length - 1) return 'prev';
+  if (i === photos.length - 1) return 'prev';
   return 'hidden';
 }
 ---
@@ -41,11 +41,11 @@ function estadoInicial(i: number) {
 >
   <ul class="relative aspect-square">
     {
-      fotos.map((foto, i) => (
-        <li data-carousel-item data-state={estadoInicial(i)}>
+      photos.map((photo, i) => (
+        <li data-carousel-item data-state={initialState(i)}>
           <img
-            src={foto.src}
-            alt={foto.alt.es}
+            src={photo.src}
+            alt={photo.alt.es}
             loading="lazy"
             class="border-accent h-full w-full rounded-2xl object-cover"
           />

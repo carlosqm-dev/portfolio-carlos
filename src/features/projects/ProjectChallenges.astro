@@ -7,23 +7,23 @@ import type { CollectionEntry } from 'astro:content';
 import T from '@/components/ui/T.astro';
 
 interface Props {
-  desafios: NonNullable<CollectionEntry<'projects'>['data']['desafios']>;
+  challenges: NonNullable<CollectionEntry<'projects'>['data']['challenges']>;
 }
 
-const { desafios } = Astro.props;
+const { challenges } = Astro.props;
 
 const ui = await getEntry('ui', 'projects');
-const { desafiosTitulo } = ui.data as { desafiosTitulo: { es: string; en: string } };
+const { challengesTitle } = ui.data as { challengesTitle: { es: string; en: string } };
 ---
 
 <section class="border-border mt-10 border-t pt-10 md:mt-12 md:pt-12">
-  <T as="h2" t={desafiosTitulo} class="text-text-primary mb-6 text-2xl font-semibold" />
+  <T as="h2" t={challengesTitle} class="text-text-primary mb-6 text-2xl font-semibold" />
   <div class="grid gap-6 md:grid-cols-2">
     {
-      desafios.map((item) => (
+      challenges.map((item) => (
         <div class="border-border bg-surface rounded-2xl border p-6">
-          <T as="h3" t={item.titulo} class="text-text-primary mb-2 text-base font-semibold" />
-          <T as="p" t={item.solucion} class="text-text-secondary text-sm" />
+          <T as="h3" t={item.title} class="text-text-primary mb-2 text-base font-semibold" />
+          <T as="p" t={item.solution} class="text-text-secondary text-sm" />
         </div>
       ))
     }

@@ -15,7 +15,7 @@ const localized = z.object({
 
 /**
  * Stack — catálogo centralizado por categorías.
- * Ver ADR-004: 4 categorías fijas, una entrada = { id, nombre, icono }.
+ * Ver ADR-004: 4 categorías fijas, una entrada = { id, name, icon }.
  * El campo `stack` de un proyecto referencia IDs de acá.
  *
  * Loader: un archivo por categoría en src/content/stack/ (frontmatter-style).
@@ -24,16 +24,16 @@ const stack = defineCollection({
   loader: glob({ pattern: '*.json', base: './src/content/stack' }),
   schema: z.object({
     // Nombre localizado de la categoría (Frontend, Backend, etc.)
-    nombre: localized,
+    name: localized,
     // Orden de aparición en la sección Stack
-    orden: z.number().int().min(0),
+    order: z.number().int().min(0),
     // Array de tecnologías de la categoría
-    tecnologias: z.array(
+    technologies: z.array(
       z.object({
         id: z.string(),
-        nombre: z.string(),
+        name: z.string(),
         // Key de astro-icon: "simple-icons:fastapi" o "local:nombre"
-        icono: z.string(),
+        icon: z.string(),
       }),
     ),
   }),
@@ -45,7 +45,7 @@ const stack = defineCollection({
  * se evalúa antes de que exista el Content Layer, así que no hay forma de
  * usar la API async de astro:content acá arriba. Un proyecto puede cruzar
  * categorías (ej: usar 1 tecnología de frontend y 2 de backend), por eso
- * se aplana `tecnologias[].id` de todos los archivos en un único Set.
+ * se aplana `technologies[].id` de todos los archivos en un único Set.
  */
 const stackDir = new URL('./content/stack/', import.meta.url);
 const validTechIds = new Set(
@@ -53,7 +53,7 @@ const validTechIds = new Set(
     .filter((file) => file.endsWith('.json'))
     .flatMap((file) => {
       const contenido = JSON.parse(readFileSync(new URL(file, stackDir), 'utf-8'));
-      return (contenido.tecnologias as Array<{ id: string }>).map((tech) => tech.id);
+      return (contenido.technologies as Array<{ id: string }>).map((tech) => tech.id);
     }),
 );
 
@@ -67,10 +67,10 @@ const validTechIds = new Set(
 const projects = defineCollection({
   loader: glob({ pattern: '*.json', base: './src/content/projects' }),
   schema: z.object({
-    titulo: localized,
-    resumen: localized, // Bajada corta para el grid
-    descripcion: localized, // Descripción completa para la página de detalle
-    imagen: z.object({ src: z.string(), alt: localized }), // Cover del grid
+    title: localized,
+    summary: localized, // Bajada corta para el grid
+    description: localized, // Descripción completa para la página de detalle
+    image: z.object({ src: z.string(), alt: localized }), // Cover del grid
     // IDs individuales de tecnología, no referencias a categorías completas:
     // un proyecto cruza categorías (ver comentario de validTechIds arriba).
     stack: z.array(
@@ -80,20 +80,20 @@ const projects = defineCollection({
     ),
     // String Mermaid para el diagrama de arquitectura
     // Ver ADR-007: NO incluir dirección; el script la inyecta.
-    diagrama: z.string().optional(),
+    diagram: z.string().optional(),
     links: z
       .object({
         demo: z.url().optional(),
         repo: z.url().optional(),
       })
       .optional(),
-    destacado: z.boolean().default(false),
-    orden: z.number().int().min(0),
+    featured: z.boolean().default(false),
+    order: z.number().int().min(0),
     // --- Campos opcionales para la página de detalle (fase 2, ver ADR-006) ---
-    estado: z.enum(['produccion', 'desarrollo', 'archivado']).optional(),
-    galeria: z.array(z.object({ src: z.string(), alt: localized })).optional(),
-    decisionesClave: z.array(z.object({ decision: localized, porQue: localized })).optional(),
-    desafios: z.array(z.object({ titulo: localized, solucion: localized })).optional(),
+    status: z.enum(['production', 'development', 'archived']).optional(),
+    gallery: z.array(z.object({ src: z.string(), alt: localized })).optional(),
+    keyDecisions: z.array(z.object({ decision: localized, why: localized })).optional(),
+    challenges: z.array(z.object({ title: localized, solution: localized })).optional(),
   }),
 });
 
@@ -106,15 +106,15 @@ const projects = defineCollection({
 const experience = defineCollection({
   loader: glob({ pattern: '*.json', base: './src/content/experience' }),
   schema: z.object({
-    tipo: z.enum(['laboral', 'profesional']),
-    empresa: z.string(),
-    rol: localized,
+    type: z.enum(['work', 'education']),
+    company: z.string(),
+    role: localized,
     // Logros en bullets — solo laboral. Educación no los trae.
-    logros: z.array(localized).optional(),
-    fechaInicio: z.string(), // ISO 8601 (YYYY-MM)
-    fechaFin: z.string().nullable(), // null = "actualidad"
-    lugar: z.string().optional(),
-    orden: z.number().int().min(0),
+    achievements: z.array(localized).optional(),
+    startDate: z.string(), // ISO 8601 (YYYY-MM)
+    endDate: z.string().nullable(), // null = "actualidad"
+    location: z.string().optional(),
+    order: z.number().int().min(0),
   }),
 });
 
@@ -127,10 +127,10 @@ const experience = defineCollection({
 const about = defineCollection({
   loader: glob({ pattern: 'about.json', base: './src/content/about' }),
   schema: z.object({
-    descripcion: localized,
+    description: localized,
     hobbies: z.array(localized).optional(),
     // El stack del carrusel necesita al menos 3 fotos (activa + laterales)
-    fotos: z
+    photos: z
       .array(
         z.object({
           src: z.string(), // ruta a la imagen

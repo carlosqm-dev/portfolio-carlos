@@ -64,10 +64,10 @@ Este documento es la fuente de verdad para el agente. Ninguna implementación de
 
 **Consecuencias:**
 
-- Una entrada del catálogo = `{ id, nombre, icono }` donde `icono` es la key de astro-icon (ej. `simple-icons:fastapi` o `local:nombre` para iconos propios).
+- Una entrada del catálogo = `{ id, name, icon }` donde `icon` es la key de astro-icon (ej. `simple-icons:fastapi` o `local:name` para iconos propios).
 - El campo `stack` de cada proyecto es un array de `id`s del catálogo, no strings libres. Zod valida contra el catálogo para impedir referencias rotas.
 - Agregar una tecnología = agregar una entrada al catálogo. La UI (card de categoría y badges en detalle de proyecto) se actualiza sola.
-- Estructura definida: `src/content/stack/` con un archivo por categoría — `frontend.json`, `backend.json`, `bases-de-datos.json`, `herramientas.json`. Cada archivo contiene el nombre localizado de la categoría y su array de tecnologías. La sección Stack renderiza una card por entrada de la colección; el orden de las cards se controla con un campo `orden`.
+- Estructura definida: `src/content/stack/` con un archivo por categoría — `frontend.json`, `backend.json`, `bases-de-datos.json`, `herramientas.json`. Cada archivo contiene el nombre localizado de la categoría y su array de tecnologías. La sección Stack renderiza una card por entrada de la colección; el orden de las cards se controla con un campo `order`.
 
 ---
 
@@ -96,7 +96,7 @@ Este documento es la fuente de verdad para el agente. Ninguna implementación de
 **Consecuencias:**
 
 - URL compartible, botón atrás nativo, SEO por proyecto.
-- El grid de la home muestra los proyectos ordenados por campo `orden`, 2 por fila.
+- El grid de la home muestra los proyectos ordenados por campo `order`, 2 por fila.
 - "Más información →" navega a la ruta del proyecto.
 
 ---
@@ -109,7 +109,7 @@ Este documento es la fuente de verdad para el agente. Ninguna implementación de
 
 **Consecuencias:**
 
-- El string Mermaid NO incluye dirección; el script inyecta LR o TB según variante. No se duplica el grafo.
+- El campo se llama `diagram` en la colección `projects`. El string Mermaid NO incluye dirección; el script inyecta LR o TB según variante. No se duplica el grafo.
 - La UI carga el SVG como imagen y alterna variante por breakpoint (`<picture>` con media query o dos `<img>` con `hidden md:block`).
 - Los SVGs commiteados son artefactos derivados. Regla: si se edita el string Mermaid de un proyecto, se debe correr `pnpm diagrams` antes de commitear.
 
@@ -208,13 +208,13 @@ const { project } = Astro.props;
 ---
 
 <article class="card">
-  <h3>{project.titulo.es}</h3>
-  <p>{project.descripcion.es}</p>
+  <h3>{project.title.es}</h3>
+  <p>{project.description.es}</p>
   <a href={`/proyectos/${project.slug}`}>Más información -></a>
 </article>
 ```
 
-Problemas: `Más información ->` está hardcodeado (viola ADR-002), accede a `.es` directo (rompe el toggle, viola ADR-003), `project` sin tipo (un typo en `titulo` falla en runtime, no en build).
+Problemas: `Más información ->` está hardcodeado (viola ADR-002), accede a `.es` directo (rompe el toggle, viola ADR-003), `project` sin tipo (un typo en `title` falla en runtime, no en build).
 
 **Correcto:**
 
@@ -231,13 +231,13 @@ interface Props {
 
 const { project } = Astro.props;
 // Textos de UI centralizados — ver ADR-002
-const ui = await getEntry('ui', 'labels');
+const ui = await getEntry('ui', 'projects');
 ---
 
 <article class="card">
-  <h3><T t={project.data.titulo} /></h3>
-  <p><T t={project.data.descripcion} /></p>
-  <a href={`/proyectos/${project.id}`}><T t={ui.data.masInformacion} /></a>
+  <h3><T t={project.data.title} /></h3>
+  <p><T t={project.data.description} /></p>
+  <a href={`/proyectos/${project.id}`}><T t={ui.data.moreInfo} /></a>
 </article>
 ```
 

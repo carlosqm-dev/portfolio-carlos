@@ -1,9 +1,9 @@
 {
-  "descripcion": {
+  "description": {
     "es": "Detrás del teclado hay una persona a la que le gusta entender cómo funcionan las cosas, no solo usarlas. Cuando no estoy programando, comparto con mi familia, escucho música o exploro lugares y experiencias nuevas. Creo que el buen software lo construye gente curiosa, y esa curiosidad la entreno todos los días, dentro y fuera de la pantalla.",
     "en": "Behind the keyboard there's someone who likes to understand how things work, not just use them. When I'm not programming, I spend time with my family, listen to music, or explore new places and experiences. I believe good software is built by curious people, and I train that curiosity every day, on and off the screen."
   },
-  "fotos": [  
+  "photos": [
     {
       "src": "/about/photo-1.jpeg",
       "alt": { "es": "Foto personal 1", "en": "Personal photo 1" }

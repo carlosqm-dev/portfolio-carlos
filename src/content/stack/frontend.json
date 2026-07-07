@@ -1,16 +1,16 @@
 {
-  "nombre": { "es": "Frontend", "en": "Frontend" },
-  "orden": 1,
-  "tecnologias": [
-    { "id": "html5", "nombre": "HTML5", "icono": "simple-icons:html5" },
-    { "id": "css3", "nombre": "CSS3", "icono": "simple-icons:css3" },
-    { "id": "javascript", "nombre": "JavaScript", "icono": "simple-icons:javascript" },
-    { "id": "typescript", "nombre": "TypeScript", "icono": "simple-icons:typescript" },
-    { "id": "react", "nombre": "React", "icono": "simple-icons:react" },
-    { "id": "next-js", "nombre": "Next.js", "icono": "simple-icons:nextdotjs" },
-    { "id": "vite", "nombre": "Vite", "icono": "simple-icons:vite" },
-    { "id": "tailwind", "nombre": "Tailwind", "icono": "simple-icons:tailwindcss" },
-    { "id": "astro", "nombre": "Astro", "icono": "simple-icons:astro" },
-    { "id": "streamlit", "nombre": "Streamlit", "icono": "simple-icons:streamlit" }
+  "name": { "es": "Frontend", "en": "Frontend" },
+  "order": 1,
+  "technologies": [
+    { "id": "html5", "name": "HTML5", "icon": "simple-icons:html5" },
+    { "id": "css3", "name": "CSS3", "icon": "simple-icons:css3" },
+    { "id": "javascript", "name": "JavaScript", "icon": "simple-icons:javascript" },
+    { "id": "typescript", "name": "TypeScript", "icon": "simple-icons:typescript" },
+    { "id": "react", "name": "React", "icon": "simple-icons:react" },
+    { "id": "next-js", "name": "Next.js", "icon": "simple-icons:nextdotjs" },
+    { "id": "vite", "name": "Vite", "icon": "simple-icons:vite" },
+    { "id": "tailwind", "name": "Tailwind", "icon": "simple-icons:tailwindcss" },
+    { "id": "astro", "name": "Astro", "icon": "simple-icons:astro" },
+    { "id": "streamlit", "name": "Streamlit", "icon": "simple-icons:streamlit" }
   ]
 }

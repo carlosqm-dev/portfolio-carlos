@@ -10,31 +10,31 @@ import T from '@/components/ui/T.astro';
 import TimelineColumn from './TimelineColumn.astro';
 
 const ui = await getEntry('ui', 'experience');
-const { title, laboral, profesional } = ui.data as {
+const { title, work, education } = ui.data as {
   title: { es: string; en: string };
-  laboral: { es: string; en: string };
-  profesional: { es: string; en: string };
+  work: { es: string; en: string };
+  education: { es: string; en: string };
 };
 
 const entries = await getCollection('experience');
 
 // Más reciente primero — se ordena acá, nunca se confía en el orden del
-// archivo (ver ADR-010). `orden` desempata cuando dos entradas comparten mes.
-function porFechaDesc(a: CollectionEntry<'experience'>, b: CollectionEntry<'experience'>) {
-  if (a.data.fechaInicio !== b.data.fechaInicio) {
-    return a.data.fechaInicio > b.data.fechaInicio ? -1 : 1;
+// archivo (ver ADR-010). `order` desempata cuando dos entradas comparten mes.
+function byDateDesc(a: CollectionEntry<'experience'>, b: CollectionEntry<'experience'>) {
+  if (a.data.startDate !== b.data.startDate) {
+    return a.data.startDate > b.data.startDate ? -1 : 1;
   }
-  return a.data.orden - b.data.orden;
+  return a.data.order - b.data.order;
 }
 
-const laboralEntries = entries.filter((e) => e.data.tipo === 'laboral').sort(porFechaDesc);
-const profesionalEntries = entries.filter((e) => e.data.tipo === 'profesional').sort(porFechaDesc);
+const workEntries = entries.filter((e) => e.data.type === 'work').sort(byDateDesc);
+const educationEntries = entries.filter((e) => e.data.type === 'education').sort(byDateDesc);
 ---
 
 <section id="experiencia" class="mt-24 scroll-mt-24 md:mt-32">
   <T as="h2" t={title} class="text-text-primary mb-8 text-3xl font-semibold" />
   <div class="md:divide-border grid gap-10 md:grid-cols-2 md:gap-0 md:divide-x">
-    <TimelineColumn label={laboral} entries={laboralEntries} side="left" />
-    <TimelineColumn label={profesional} entries={profesionalEntries} side="right" />
+    <TimelineColumn label={work} entries={workEntries} side="left" />
+    <TimelineColumn label={education} entries={educationEntries} side="right" />
   </div>
 </section>

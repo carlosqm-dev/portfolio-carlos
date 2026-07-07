@@ -1,17 +1,17 @@
 {
   "title": { "es": "Proyectos", "en": "Projects" },
-  "masInformacion": { "es": "Más información →", "en": "More information →" },
+  "moreInfo": { "es": "Más información →", "en": "More information →" },
   "github": { "es": "GitHub", "en": "GitHub" },
   "web": { "es": "Web", "en": "Live demo" },
-  "volver": { "es": "← Volver", "en": "← Back" },
-  "estado": {
-    "produccion": { "es": "En producción", "en": "In production" },
-    "desarrollo": { "es": "En desarrollo", "en": "In development" },
-    "archivado": { "es": "Archivado", "en": "Archived" }
+  "back": { "es": "← Volver", "en": "← Back" },
+  "status": {
+    "production": { "es": "En producción", "en": "In production" },
+    "development": { "es": "En desarrollo", "en": "In development" },
+    "archived": { "es": "Archivado", "en": "Archived" }
   },
-  "stackTitulo": { "es": "Stack tecnológico", "en": "Tech stack" },
-  "arquitecturaTitulo": { "es": "Arquitectura", "en": "Architecture" },
-  "decisionesClaveTitulo": { "es": "Decisiones clave", "en": "Key decisions" },
-  "desafiosTitulo": { "es": "Desafíos y soluciones", "en": "Challenges and solutions" },
-  "cerrarVisor": { "es": "Cerrar", "en": "Close" }
+  "stackTitle": { "es": "Stack tecnológico", "en": "Tech stack" },
+  "architectureTitle": { "es": "Arquitectura", "en": "Architecture" },
+  "keyDecisionsTitle": { "es": "Decisiones clave", "en": "Key decisions" },
+  "challengesTitle": { "es": "Desafíos y soluciones", "en": "Challenges and solutions" },
+  "closeViewer": { "es": "Cerrar", "en": "Close" }
 }

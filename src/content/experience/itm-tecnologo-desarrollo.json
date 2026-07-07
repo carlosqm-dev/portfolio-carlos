@@ -1,12 +1,12 @@
 {
-  "tipo": "profesional",
-  "empresa": "ITM (Instituto Tecnológico Metropolitano)",
-  "rol": {
+  "type": "education",
+  "company": "ITM (Instituto Tecnológico Metropolitano)",
+  "role": {
     "es": "Tecnólogo en Desarrollo de Software",
     "en": "Associate Degree in Software Development"
   },
-  "fechaInicio": "2025-08",
-  "fechaFin": null,
-  "lugar": "Medellín, Colombia",
-  "orden": 0
+  "startDate": "2025-08",
+  "endDate": null,
+  "location": "Medellín, Colombia",
+  "order": 0
 }

@@ -14,13 +14,13 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { titulo, estado, links } = entry.data;
+const { title, status, links } = entry.data;
 
 const ui = await getEntry('ui', 'projects');
-const { volver, estado: estadoLabels } = ui.data as {
-  volver: { es: string; en: string };
-  estado: Record<
-    NonNullable<CollectionEntry<'projects'>['data']['estado']>,
+const { back, status: statusLabels } = ui.data as {
+  back: { es: string; en: string };
+  status: Record<
+    NonNullable<CollectionEntry<'projects'>['data']['status']>,
     { es: string; en: string }
   >;
 };
@@ -31,18 +31,18 @@ const { volver, estado: estadoLabels } = ui.data as {
     href="/#proyectos"
     class="text-text-secondary hover:text-accent inline-flex w-fit items-center text-sm transition-colors"
   >
-    <T t={volver} />
+    <T t={back} />
   </a>
 
   <div class="flex flex-wrap items-center justify-between gap-4">
     <div class="flex flex-wrap items-center gap-4">
-      <T as="h1" t={titulo} class="text-text-primary text-3xl font-semibold md:text-4xl" />
+      <T as="h1" t={title} class="text-text-primary text-3xl font-semibold md:text-4xl" />
       {
-        estado && (
+        status && (
           // Sin token de estado en DESIGN.md: se usa el rol de badge —
           // fondo accent-subtle + texto accent (ver docs/DESIGN.md).
-          <span class="badge-estado text-accent inline-flex items-center rounded-full px-3 py-1 text-xs font-medium">
-            <T t={estadoLabels[estado]} />
+          <span class="badge-status text-accent inline-flex items-center rounded-full px-3 py-1 text-xs font-medium">
+            <T t={statusLabels[status]} />
           </span>
         )
       }
@@ -54,7 +54,7 @@ const { volver, estado: estadoLabels } = ui.data as {
 <style>
   /* accent-subtle es rgba, no puede vivir en @theme (ver global.css) —
      se aplica como CSS plano en vez de una utilidad Tailwind. */
-  .badge-estado {
+  .badge-status {
     background: var(--accent-subtle);
   }
 </style>

@@ -1,9 +1,9 @@
 {
   "title": { "es": "Experiencia", "en": "Experience" },
-  "laboral": { "es": "Laboral", "en": "Work" },
-  "profesional": { "es": "Profesional", "en": "Education" },
-  "presente": { "es": "Presente", "en": "Present" },
-  "meses": {
+  "work": { "es": "Laboral", "en": "Work" },
+  "education": { "es": "Profesional", "en": "Education" },
+  "present": { "es": "Presente", "en": "Present" },
+  "months": {
     "01": { "es": "Enero", "en": "January" },
     "02": { "es": "Febrero", "en": "February" },
     "03": { "es": "Marzo", "en": "March" },

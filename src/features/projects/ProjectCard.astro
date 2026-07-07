@@ -14,11 +14,11 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { titulo, resumen, imagen, links } = entry.data;
+const { title, summary, image, links } = entry.data;
 
 const ui = await getEntry('ui', 'projects');
-const { masInformacion, github } = ui.data as {
-  masInformacion: { es: string; en: string };
+const { moreInfo, github } = ui.data as {
+  moreInfo: { es: string; en: string };
   github: { es: string; en: string };
 };
 ---
@@ -27,12 +27,12 @@ const { masInformacion, github } = ui.data as {
   class="border-border bg-surface hover:border-accent rounded-2xl border p-6 transition-colors"
 >
   <img
-    src={imagen.src}
-    alt={imagen.alt.es}
+    src={image.src}
+    alt={image.alt.es}
     class="mb-4 aspect-video w-full rounded-xl object-cover"
   />
-  <T as="h3" t={titulo} class="text-text-primary mb-6 text-lg font-semibold" />
-  <T as="p" t={resumen} class="text-text-secondary mb-4 text-sm" />
+  <T as="h3" t={title} class="text-text-primary mb-6 text-lg font-semibold" />
+  <T as="p" t={summary} class="text-text-secondary mb-4 text-sm" />
   <div class="flex items-center justify-between">
     {
       links?.repo && (
@@ -51,7 +51,7 @@ const { masInformacion, github } = ui.data as {
       href={`/proyectos/${entry.id}`}
       class="text-accent hover:text-accent-hover text-sm font-medium transition-colors"
     >
-      <T t={masInformacion} />
+      <T t={moreInfo} />
     </a>
   </div>
 </article>

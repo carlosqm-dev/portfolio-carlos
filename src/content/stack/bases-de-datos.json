@@ -1,11 +1,11 @@
 {
-  "nombre": { "es": "Bases de datos", "en": "Databases" },
-  "orden": 2,
-  "tecnologias": [
-    { "id": "postgresql", "nombre": "PostgreSQL", "icono": "simple-icons:postgresql" },
-    { "id": "sql-server", "nombre": "SQL Server", "icono": "simple-icons:microsoftsqlserver" },
-    { "id": "mysql", "nombre": "MySQL", "icono": "simple-icons:mysql" },
-    { "id": "sqlite", "nombre": "SQLite", "icono": "simple-icons:sqlite" },
-    { "id": "supabase", "nombre": "Supabase", "icono": "simple-icons:supabase" }
+  "name": { "es": "Bases de datos", "en": "Databases" },
+  "order": 2,
+  "technologies": [
+    { "id": "postgresql", "name": "PostgreSQL", "icon": "simple-icons:postgresql" },
+    { "id": "sql-server", "name": "SQL Server", "icon": "simple-icons:microsoftsqlserver" },
+    { "id": "mysql", "name": "MySQL", "icon": "simple-icons:mysql" },
+    { "id": "sqlite", "name": "SQLite", "icon": "simple-icons:sqlite" },
+    { "id": "supabase", "name": "Supabase", "icon": "simple-icons:supabase" }
   ]
 }

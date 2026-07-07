@@ -13,7 +13,7 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { nombre, tecnologias } = entry.data;
+const { name, technologies } = entry.data;
 
 // Box del icono anidado en una card `surface` → sube un escalón a
 // `surface-2` (bg → surface → surface-2, ver DESIGN.md). Mismo patrón
@@ -24,16 +24,16 @@ const label = 'font-mono text-xs text-text-muted';
 ---
 
 <article class="border-border bg-surface rounded-2xl border p-6">
-  <T as="h3" t={nombre} class="text-text-primary mb-6 text-lg font-semibold" />
+  <T as="h3" t={name} class="text-text-primary mb-6 text-lg font-semibold" />
   <ul class="flex flex-wrap gap-5">
     {
-      tecnologias.map((tech) => (
+      technologies.map((tech) => (
         <li>
           <div class="group flex flex-col items-center gap-2">
             <span class={box}>
-              <Icon name={tech.icono} size={26} />
+              <Icon name={tech.icon} size={26} />
             </span>
-            <span class={label}>{tech.nombre}</span>
+            <span class={label}>{tech.name}</span>
           </div>
         </li>
       ))

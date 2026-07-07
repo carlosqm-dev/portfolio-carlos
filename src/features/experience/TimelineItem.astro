@@ -15,31 +15,31 @@ interface Props {
 }
 
 const { entry, side } = Astro.props;
-const { rol, empresa, lugar, fechaInicio, fechaFin, logros } = entry.data;
+const { role, company, location, startDate, endDate, achievements } = entry.data;
 const isRight = side === 'right';
-const esActual = fechaFin === null;
+const isCurrent = endDate === null;
 
 const ui = await getEntry('ui', 'experience');
-const { presente, meses } = ui.data as {
-  presente: { es: string; en: string };
-  meses: Record<string, { es: string; en: string }>;
+const { present, months } = ui.data as {
+  present: { es: string; en: string };
+  months: Record<string, { es: string; en: string }>;
 };
 
-const [anioInicio, mesInicio] = fechaInicio.split('-');
-const inicio = {
-  es: `${meses[mesInicio].es} ${anioInicio}`,
-  en: `${meses[mesInicio].en} ${anioInicio}`,
+const [yearStart, monthStart] = startDate.split('-');
+const start = {
+  es: `${months[monthStart].es} ${yearStart}`,
+  en: `${months[monthStart].en} ${yearStart}`,
 };
 
-let fin: { es: string; en: string };
-if (esActual) {
-  fin = presente;
+let end: { es: string; en: string };
+if (isCurrent) {
+  end = present;
 } else {
-  const [anioFin, mesFin] = fechaFin.split('-');
-  fin = { es: `${meses[mesFin].es} ${anioFin}`, en: `${meses[mesFin].en} ${anioFin}` };
+  const [yearEnd, monthEnd] = endDate.split('-');
+  end = { es: `${months[monthEnd].es} ${yearEnd}`, en: `${months[monthEnd].en} ${yearEnd}` };
 }
 
-const rango = { es: `${inicio.es} — ${fin.es}`, en: `${inicio.en} — ${fin.en}` };
+const range = { es: `${start.es} — ${end.es}`, en: `${start.en} — ${end.en}` };
 
 // El dot se centra sobre la línea del <ol> (border-l/r): `left-0`/`right-0`
 // coincide con el borde de la línea, y el translate lo corre la mitad de su
@@ -52,18 +52,18 @@ const dotClass = isRight
 
 <li class={liClass}>
   <span class={dotClass} aria-hidden="true"></span>
-  <T t={rango} class="text-text-muted font-mono text-xs" />
+  <T t={range} class="text-text-muted font-mono text-xs" />
   <p class="mt-1">
-    <T as="span" t={rol} class="text-text-primary font-medium" />
-    <span class="text-text-secondary"> — {empresa}</span>
-    {lugar && <span class="text-text-muted"> · {lugar}</span>}
+    <T as="span" t={role} class="text-text-primary font-medium" />
+    <span class="text-text-secondary"> — {company}</span>
+    {location && <span class="text-text-muted"> · {location}</span>}
   </p>
   {
-    logros && logros.length > 0 && (
+    achievements && achievements.length > 0 && (
       <ul class="marker:text-text-muted mt-3 flex list-disc flex-col gap-1.5 pl-4">
-        {logros.map((logro) => (
+        {achievements.map((achievement) => (
           <li>
-            <T as="span" t={logro} class="text-text-secondary text-sm" />
+            <T as="span" t={achievement} class="text-text-secondary text-sm" />
           </li>
         ))}
       </ul>

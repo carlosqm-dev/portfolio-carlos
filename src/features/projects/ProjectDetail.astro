@@ -18,7 +18,7 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { titulo, imagen, galeria, descripcion, stack, diagrama, decisionesClave, desafios, links } =
+const { title, image, gallery, description, stack, diagram, keyDecisions, challenges, links } =
   entry.data;
 ---
 
@@ -30,30 +30,30 @@ const { titulo, imagen, galeria, descripcion, stack, diagrama, decisionesClave, 
       <button
         type="button"
         data-lightbox-trigger
-        data-src={imagen.src}
-        data-alt={imagen.alt.es}
+        data-src={image.src}
+        data-alt={image.alt.es}
         class="block w-full cursor-zoom-in"
       >
         <img
-          src={imagen.src}
-          alt={imagen.alt.es}
+          src={image.src}
+          alt={image.alt.es}
           class="aspect-video w-full rounded-2xl object-cover"
         />
       </button>
       {
-        galeria && (
+        gallery && (
           <div class="grid grid-cols-2 gap-4">
-            {galeria.map((foto) => (
+            {gallery.map((photo) => (
               <button
                 type="button"
                 data-lightbox-trigger
-                data-src={foto.src}
-                data-alt={foto.alt.es}
+                data-src={photo.src}
+                data-alt={photo.alt.es}
                 class="block w-full cursor-zoom-in"
               >
                 <img
-                  src={foto.src}
-                  alt={foto.alt.es}
+                  src={photo.src}
+                  alt={photo.alt.es}
                   class="aspect-video w-full rounded-xl object-cover"
                 />
               </button>
@@ -64,7 +64,7 @@ const { titulo, imagen, galeria, descripcion, stack, diagrama, decisionesClave, 
     </div>
     <T
       as="p"
-      t={descripcion}
+      t={description}
       class="text-text-secondary text-base leading-relaxed whitespace-pre-line"
     />
   </section>
@@ -72,17 +72,17 @@ const { titulo, imagen, galeria, descripcion, stack, diagrama, decisionesClave, 
   <ProjectStack stackIds={stack} />
 
   {
-    (diagrama || decisionesClave) && (
+    (diagram || keyDecisions) && (
       <ProjectArchitecture
         slug={entry.id}
-        titulo={titulo}
-        diagrama={diagrama}
-        decisionesClave={decisionesClave}
+        title={title}
+        diagram={diagram}
+        keyDecisions={keyDecisions}
       />
     )
   }
 
-  {desafios && <ProjectChallenges desafios={desafios} />}
+  {challenges && <ProjectChallenges challenges={challenges} />}
 
   <footer class="border-border mt-10 flex justify-end border-t pt-10 md:mt-12 md:pt-12">
     <ProjectLinks links={links} />

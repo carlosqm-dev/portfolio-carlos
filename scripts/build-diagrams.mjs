@@ -2,7 +2,7 @@
 /**
  * Genera SVGs de Mermaid a partir de los strings en src/content/projects/.
  * Ver ADR-007:
- *  - Por cada proyecto con campo `diagrama`, genera dos SVGs:
+ *  - Por cada proyecto con campo `diagram`, genera dos SVGs:
  *      public/diagrams/{slug}-desktop.svg (dirección LR)
  *      public/diagrams/{slug}-mobile.svg  (dirección TB)
  *  - El string Mermaid NO incluye dirección: el script la inyecta.
@@ -29,8 +29,8 @@ async function loadProjects() {
     const raw = await readFile(join(PROJECTS_DIR, entry), 'utf-8');
     const data = JSON.parse(raw);
     const slug = entry.replace(/\.json$/, '');
-    if (data.diagrama) {
-      projects.push({ slug, source: data.diagrama });
+    if (data.diagram) {
+      projects.push({ slug, source: data.diagram });
     }
   }
   return projects;
@@ -60,7 +60,7 @@ async function main() {
 
   if (projects.length === 0) {
     console.log(
-      'ℹ️  No hay diagramas para generar (src/content/projects/*.json sin campo "diagrama").',
+      'ℹ️  No hay diagramas para generar (src/content/projects/*.json sin campo "diagram").',
     );
     return;
   }

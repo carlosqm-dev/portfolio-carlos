@@ -1,12 +1,12 @@
 {
-  "tipo": "laboral",
-  "empresa": "Prebel S.A",
-  "rol": { "es": "Auxiliar de automatizaciones", "en": "Automation Assistant" },
-  "fechaInicio": "2025-07",
-  "fechaFin": "2026-01",
-  "lugar": "Medellín, Colombia",
-  "orden": 0,
-  "logros": [
+  "type": "work",
+  "company": "Prebel S.A",
+  "role": { "es": "Auxiliar de automatizaciones", "en": "Automation Assistant" },
+  "startDate": "2025-07",
+  "endDate": "2026-01",
+  "location": "Medellín, Colombia",
+  "order": 0,
+  "achievements": [
     {
       "es": "Lideré la automatización de procesos en el área de planeación financiera, eliminando tareas operativas mediante scripts de Python y SQL.",
       "en": "Led process automation in the financial planning area, eliminating operational tasks through Python and SQL scripts."

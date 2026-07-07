@@ -14,14 +14,14 @@ const { title } = ui.data as {
 };
 
 const about = await getEntry('about', 'about');
-const { descripcion, hobbies, fotos } = about.data;
+const { description, hobbies, photos } = about.data;
 ---
 
 <section id="sobre-mi" class="mt-24 scroll-mt-24 md:mt-32">
   <T as="h2" t={title} class="text-text-primary mb-8 text-3xl font-semibold" />
   <div class="grid items-center gap-12 md:grid-cols-2">
     <div>
-      <T as="p" t={descripcion} class="text-text-secondary leading-relaxed" />
+      <T as="p" t={description} class="text-text-secondary leading-relaxed" />
       {
         hobbies && (
           <ul class="mt-6 flex flex-wrap gap-2">
@@ -34,6 +34,6 @@ const { descripcion, hobbies, fotos } = about.data;
         )
       }
     </div>
-    <PhotoCarousel fotos={fotos} />
+    <PhotoCarousel photos={photos} />
   </div>
 </section>

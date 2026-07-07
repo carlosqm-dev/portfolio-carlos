@@ -15,27 +15,27 @@ interface Props {
 const { stackIds } = Astro.props;
 
 const ui = await getEntry('ui', 'projects');
-const { stackTitulo } = ui.data as { stackTitulo: { es: string; en: string } };
+const { stackTitle } = ui.data as { stackTitle: { es: string; en: string } };
 
-const catalogo = new Map(
+const catalog = new Map(
   (await getCollection('stack'))
-    .flatMap((categoria) => categoria.data.tecnologias)
+    .flatMap((category) => category.data.technologies)
     .map((tech) => [tech.id, tech]),
 );
 
-const tecnologias = stackIds
-  .map((id) => catalogo.get(id))
+const technologies = stackIds
+  .map((id) => catalog.get(id))
   .filter((tech): tech is NonNullable<typeof tech> => tech !== undefined);
 ---
 
 <section class="border-border mt-10 border-t pt-10 md:mt-12 md:pt-12">
-  <T as="h2" t={stackTitulo} class="text-text-primary mb-6 text-2xl font-semibold" />
+  <T as="h2" t={stackTitle} class="text-text-primary mb-6 text-2xl font-semibold" />
   <ul class="flex flex-wrap gap-3">
     {
-      tecnologias.map((tech) => (
+      technologies.map((tech) => (
         <li class="border-border bg-surface-2 inline-flex items-center gap-2 rounded-full border px-3 py-1.5">
-          <Icon name={tech.icono} size={16} class="text-text-secondary" />
-          <span class="text-text-muted font-mono text-xs">{tech.nombre}</span>
+          <Icon name={tech.icon} size={16} class="text-text-secondary" />
+          <span class="text-text-muted font-mono text-xs">{tech.name}</span>
         </li>
       ))
     }

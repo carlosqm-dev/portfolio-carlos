@@ -1,12 +1,15 @@
 {
-  "tipo": "laboral",
-  "empresa": "Prebel S.A",
-  "rol": { "es": "Desarrollador de Software (Prácticas)", "en": "Software Developer (Internship)" },
-  "fechaInicio": "2025-01",
-  "fechaFin": "2025-07",
-  "lugar": "Medellín, Colombia",
-  "orden": 1,
-  "logros": [
+  "type": "work",
+  "company": "Prebel S.A",
+  "role": {
+    "es": "Desarrollador de Software (Prácticas)",
+    "en": "Software Developer (Internship)"
+  },
+  "startDate": "2025-01",
+  "endDate": "2025-07",
+  "location": "Medellín, Colombia",
+  "order": 1,
+  "achievements": [
     {
       "es": "Diseñé e implementé bases de datos en SQL Server para asegurar la integridad de la información.",
       "en": "Designed and implemented SQL Server databases to ensure data integrity."
