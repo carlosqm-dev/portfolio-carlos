@@ -59,7 +59,7 @@
   "diagram": "subgraph Interfaz de usuario\n        A[\"navegación por estado\"]\n        B[\"landing de marca\"]\n        C[\"catálogo + wizard + carrito + entrega\"]\n        D[\"shared/<br/>ui/ y lib/\"]\n    end\n    subgraph \"Dominio (datos aislados de la UI)\"\n        E[\"Tipos · Precios · Validación\"]\n        F[\"productos como datos\"]\n    end\n    A --> B\n    A --> C\n    B --> D\n    C --> D\n    B --> F\n    C --> E\n    C --> F\n    F --> E\n    C --> G[\"Texto de WhatsApp\"]",
   "links": {
     "repo": "https://github.com/carlosqm-dev/dfruta-madre-landing",
-    "demo": "https://dfrutamadre.hydreon.com.co"
+    "demo": "https://dfrutamadre.com"
   },
   "featured": false,
   "order": 1
