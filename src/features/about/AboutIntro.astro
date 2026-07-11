@@ -1,0 +1,26 @@
+---
+/**
+ * Fold de intro de /sobre-mi — historia profesional + carrusel de fotos.
+ * Ver ADR-010 (contrato de dos columnas, ahora acotado al fold de intro)
+ * y ADR-011 (página dedicada `/sobre-mi`).
+ */
+import { getEntry } from 'astro:content';
+import T from '@/components/ui/T.astro';
+import PhotoCarousel from './PhotoCarousel.astro';
+
+const ui = await getEntry('ui', 'about');
+const { title } = ui.data as {
+  title: { es: string; en: string };
+};
+
+const about = await getEntry('about', 'about');
+const { description, photos } = about.data;
+---
+
+<section class="mt-24 md:mt-32">
+  <T as="h2" t={title} class="text-text-primary mb-8 text-3xl font-semibold" />
+  <div class="grid items-center gap-12 md:grid-cols-2">
+    <T as="p" t={description} class="text-text-secondary leading-relaxed" />
+    <PhotoCarousel photos={photos} />
+  </div>
+</section>

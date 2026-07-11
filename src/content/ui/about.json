@@ -1,4 +1,5 @@
 {
   "title": { "es": "Un poco sobre mí", "en": "A bit about me" },
-  "carouselLabel": { "es": "Fotos personales", "en": "Personal photos" }
+  "carouselLabel": { "es": "Fotos personales", "en": "Personal photos" },
+  "bioTitle": { "es": "En lo personal", "en": "On a personal note" }
 }

@@ -1,0 +1,35 @@
+---
+/**
+ * Página dedicada "Sobre mí" (Ver ADR-011). Reusa el Header completo con
+ * `homeHref="/"` para que el pill de marca vuelva a la home en vez de
+ * hacer scroll a un anchor local.
+ */
+import { getEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/features/header/Header.astro';
+import AboutIntro from '@/features/about/AboutIntro.astro';
+import PersonalBio from '@/features/about/PersonalBio.astro';
+
+const ui = await getEntry('ui', 'about');
+const { title } = ui.data as {
+  title: { es: string; en: string };
+};
+
+const about = await getEntry('about', 'about');
+---
+
+<BaseLayout title={`${title.es} — Carlos Quiroz`} description={about.data.description.es}>
+  <div id="top">
+    <Header homeHref="/" />
+    <main class="mx-auto max-w-6xl px-4 py-12 md:py-20">
+      <AboutIntro />
+      <PersonalBio />
+    </main>
+  </div>
+
+  <script>
+    import '@/scripts/lang-toggle.ts';
+    import '@/scripts/hamburger.ts';
+    import '@/features/about/photo-carousel.ts';
+  </script>
+</BaseLayout>

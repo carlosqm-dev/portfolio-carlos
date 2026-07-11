@@ -1,0 +1,23 @@
+---
+/**
+ * Reseña personal de /sobre-mi (Ver ADR-011): párrafos bio de la
+ * colección `about`, debajo del fold de intro (AboutIntro).
+ */
+import { getEntry } from 'astro:content';
+import T from '@/components/ui/T.astro';
+
+const ui = await getEntry('ui', 'about');
+const { bioTitle } = ui.data as {
+  bioTitle: { es: string; en: string };
+};
+
+const about = await getEntry('about', 'about');
+const { bio } = about.data;
+---
+
+<section class="mt-24 md:mt-32">
+  <T as="h2" t={bioTitle} class="text-text-primary mb-8 text-3xl font-semibold" />
+  <div class="space-y-4">
+    {bio.map((paragraph) => <T as="p" t={paragraph} class="text-text-secondary leading-relaxed" />)}
+  </div>
+</section>

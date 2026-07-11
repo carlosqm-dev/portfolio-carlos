@@ -131,11 +131,12 @@ src/
     stack/            # StackSection, CategoryCard
     projects/         # ProjectCard, ProjectGrid, ProjectDetail
     experience/       # Timeline, TimelineItem
-    about/            # PhotoCarousel
+    about/            # AboutIntro, PersonalBio, PhotoCarousel
   components/ui/      # primitivos compartidos: Pill, Card, SectionTitle, Icon, T
   layouts/
   pages/
     index.astro
+    sobre-mi.astro
     proyectos/[slug].astro
   icons/              # SVGs locales para astro-icon
 scripts/
@@ -164,7 +165,25 @@ public/
 
 **Decisión (Experiencia):** Dos timelines paralelas (Laboral | Profesional) separadas por línea divisora vertical, con líneas guía verticales por columna. Orden: más reciente primero, controlado por datos (ordenar por fecha en el componente, no confiar en el orden del archivo).
 
-**Decisión (Sobre mí):** Dos columnas: izquierda descripción personal (hobbies, vida privada), derecha carrusel de fotos personales. Carrusel sin framework (ver ADR-001).
+**Decisión (Sobre mí):** Fold de intro en dos columnas: izquierda historia profesional, derecha carrusel de fotos personales. Carrusel sin framework (ver ADR-001).
+
+**Nota (ver ADR-011):** el contrato de dos columnas descrito acá aplica solo al fold de intro (`AboutIntro.astro`) de la página dedicada `/sobre-mi`. La reseña personal (hobbies, vida privada) se movió a una sección propia debajo de ese fold — no contradice esta decisión, la acota.
+
+---
+
+## ADR-011 — Sobre mí: página dedicada
+
+**Decisión:** "Sobre mí" pasa de sección anclada en la home a ruta propia `pages/sobre-mi.astro`. El Header completo se reutiliza vía prop `homeHref` (default `"#top"` en home; `"/"` en `/sobre-mi`) para que el pill de marca navegue a la home en vez de hacer scroll a un anchor inexistente en esa página.
+
+**Contexto:** La reseña personal (hobbies, vida privada) crecía y competía por espacio con el contenido profesional en la home. Separarla en su propia ruta permite ampliar la historia personal sin alargar la home, y da una URL directa para compartir esa parte del perfil.
+
+**Consecuencias:**
+
+- El nav del header deja de ser 100% anchors same-page: `#stack`, `#proyectos`, `#experiencia` pasan a `/#stack`, `/#proyectos`, `/#experiencia` (home-relative) y `#sobre-mi` pasa a `/sobre-mi` (ruta completa). Ver `src/content/ui/hero.json`.
+- Modelo de contenido de la colección `about` se divide en dos campos: `description` (historia profesional, se muestra en el fold de intro de `/sobre-mi`) y `bio` (array de párrafos de reseña personal, se muestra en `PersonalBio.astro` debajo del fold). El campo `hobbies` se elimina — la reseña personal en prosa lo reemplaza.
+- `features/about/AboutSection.astro` se renombra a `AboutIntro.astro` (pierde `id="sobre-mi"` y `scroll-mt-24`, ya no es un anchor de la home) y se agrega `PersonalBio.astro` como componente nuevo.
+- `index.astro` ya no importa ni renderiza el fold de "Sobre mí"; esa responsabilidad vive enteramente en `pages/sobre-mi.astro`.
+- No contradice ADR-010: ese ADR describe el contrato visual del fold de intro (dos columnas), que sigue vigente dentro de la nueva página.
 
 ---
 

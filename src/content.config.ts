@@ -119,16 +119,17 @@ const experience = defineCollection({
 });
 
 /**
- * About — descripción personal + lista de fotos para el carrusel.
- * Ver ADR-010: dos columnas (descripción izq, carrusel der).
+ * About — historia profesional, reseña personal y fotos para el carrusel.
+ * Ver ADR-010 (contrato de dos columnas del fold de intro) y ADR-011
+ * (página dedicada `/sobre-mi`, `description` profesional + `bio` personal).
  *
  * Loader: un único documento con fotos referenciadas.
  */
 const about = defineCollection({
   loader: glob({ pattern: 'about.json', base: './src/content/about' }),
   schema: z.object({
-    description: localized,
-    hobbies: z.array(localized).optional(),
+    description: localized, // Historia profesional — fold de intro
+    bio: z.array(localized).min(1), // Párrafos de reseña personal
     // El stack del carrusel necesita al menos 3 fotos (activa + laterales)
     photos: z
       .array(

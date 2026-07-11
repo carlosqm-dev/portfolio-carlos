@@ -3,10 +3,10 @@
   "name": "Carlos Quiroz",
   "langToggle": { "es": "ES", "en": "EN" },
   "nav": [
-    { "href": "#stack", "label": { "es": "Stack", "en": "Stack" } },
-    { "href": "#proyectos", "label": { "es": "Proyectos", "en": "Projects" } },
-    { "href": "#experiencia", "label": { "es": "Experiencia", "en": "Experience" } },
-    { "href": "#sobre-mi", "label": { "es": "Sobre mí", "en": "About" } }
+    { "href": "/#stack", "label": { "es": "Stack", "en": "Stack" } },
+    { "href": "/#proyectos", "label": { "es": "Proyectos", "en": "Projects" } },
+    { "href": "/#experiencia", "label": { "es": "Experiencia", "en": "Experience" } },
+    { "href": "/sobre-mi", "label": { "es": "Sobre mí", "en": "About" } }
   ],
   "greeting": { "es": "Hola, me llamo Carlos", "en": "Hi, I'm Carlos" },
   "description": {

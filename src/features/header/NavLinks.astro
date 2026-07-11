@@ -2,8 +2,9 @@
 /**
  * Lista de enlaces de navegación bilingüe.
  * Se usa tanto en el nav de desktop como en el menú mobile (DRY).
- * Los href son anchors a las secciones de la home (#stack, etc.);
- * el scroll suave lo resuelve CSS (scroll-behavior), sin JS.
+ * Ver ADR-011: los href son anchors relativos a la home (/#stack, etc.)
+ * o rutas completas (/sobre-mi); el scroll suave a anchors lo resuelve CSS
+ * (scroll-behavior), sin JS.
  */
 import T from '@/components/ui/T.astro';
 

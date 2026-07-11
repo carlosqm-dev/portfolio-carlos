@@ -1,8 +1,18 @@
 {
   "description": {
-    "es": "Detrás del teclado hay una persona a la que le gusta entender cómo funcionan las cosas, no solo usarlas. Cuando no estoy programando, comparto con mi familia, escucho música o exploro lugares y experiencias nuevas. Creo que el buen software lo construye gente curiosa, y esa curiosidad la entreno todos los días, dentro y fuera de la pantalla.",
-    "en": "Behind the keyboard there's someone who likes to understand how things work, not just use them. When I'm not programming, I spend time with my family, listen to music, or explore new places and experiences. I believe good software is built by curious people, and I train that curiosity every day, on and off the screen."
+    "es": "PLACEHOLDER — Historia profesional de Carlos: cómo empezó en desarrollo, qué lo llevó a especializarse en Full Stack y qué lo mueve al construir software. Reemplazar con la reseña real.",
+    "en": "PLACEHOLDER — Carlos's professional story: how he got into development, what led him to specialize as a Full Stack developer, and what drives him when building software. Replace with the real story."
   },
+  "bio": [
+    {
+      "es": "PLACEHOLDER — Primer párrafo personal: quién es Carlos fuera del código, sus intereses o pasiones. Reemplazar con contenido real.",
+      "en": "PLACEHOLDER — First personal paragraph: who Carlos is outside of code, his interests or passions. Replace with real content."
+    },
+    {
+      "es": "PLACEHOLDER — Segundo párrafo personal (opcional): otra faceta personal, hobbies o vida cotidiana. Reemplazar o eliminar si no aplica.",
+      "en": "PLACEHOLDER — Second personal paragraph (optional): another personal facet, hobbies, or everyday life. Replace or remove if not needed."
+    }
+  ],
   "photos": [
     {
       "src": "/about/photo-1.jpeg",

@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 `AGENTS.md` is the entry index. The authoritative docs live in `docs/` and **must be read before implementing**:
 
-- `docs/DECISIONS.md` — 10 ADRs (architecture, data, i18n, icons, diagrams, structure). No change may contradict an ADR without updating it first.
+- `docs/DECISIONS.md` — 11 ADRs (architecture, data, i18n, icons, diagrams, structure). No change may contradict an ADR without updating it first.
 - `docs/DESIGN.md` — design system: color/typography rules by role (not a token dump — explains _why_ and _when_).
 - `docs/CONTEXT.md` — goal, value proposition, tone. Read before proposing copy or UI wording.
 

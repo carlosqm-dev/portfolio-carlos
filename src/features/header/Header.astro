@@ -18,6 +18,14 @@ import NavLinks from './NavLinks.astro';
 
 type Localized = { es: string; en: string };
 
+interface Props {
+  // Destino del pill de marca. Home usa el default "#top" (ancla local);
+  // páginas fuera de la home (ej. /sobre-mi) pasan "/" — Ver ADR-011.
+  homeHref?: string;
+}
+
+const { homeHref = '#top' } = Astro.props;
+
 const hero = await getEntry('ui', 'hero');
 // La colección `ui` tiene shape abierto (ADR-002); tipamos lo que consumimos.
 const { brand, langToggle, nav } = hero.data as {
@@ -36,7 +44,7 @@ const pill = 'rounded-2xl border border-border bg-surface/80 backdrop-blur';
   <div class="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-4">
     {/* Pill marca — siempre visible, también en mobile */}
     <a
-      href="#top"
+      href={homeHref}
       class={`${pill} px-5 py-2.5 font-medium text-text-primary transition-colors hover:border-border-strong`}
     >
       <T t={brand} />
