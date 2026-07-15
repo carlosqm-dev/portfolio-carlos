@@ -1,8 +1,11 @@
 ---
 /**
- * Sección "Arquitectura — el porqué": diagrama (ADR-007) arriba y
- * decisiones clave debajo, en una sola columna. Se renderiza solo cuando
+ * Sección "Diagramas": una pila vertical de N diagramas con subtítulo
+ * bilingüe, seguidos de las decisiones clave. Se renderiza solo cuando
  * existe al menos uno de los dos (ver ProjectDetail.astro).
+ *
+ * Ver ADR-007: por cada entrada de `diagrams` se generan dos SVGs
+ * (`{slug}-desktop-{N}.svg` y `{slug}-mobile-{N}.svg`) con `pnpm diagrams`.
  */
 import { getEntry } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
@@ -13,11 +16,11 @@ type ProjectData = CollectionEntry<'projects'>['data'];
 interface Props {
   slug: string;
   title: ProjectData['title'];
-  diagram: ProjectData['diagram'];
+  diagrams: NonNullable<ProjectData['diagrams']>;
   keyDecisions: ProjectData['keyDecisions'];
 }
 
-const { slug, title, diagram, keyDecisions } = Astro.props;
+const { slug, title, diagrams, keyDecisions } = Astro.props;
 
 const ui = await getEntry('ui', 'projects');
 const { architectureTitle, keyDecisionsTitle } = ui.data as {
@@ -28,23 +31,24 @@ const { architectureTitle, keyDecisionsTitle } = ui.data as {
 
 <section class="border-border mt-10 border-t pt-10 md:mt-12 md:pt-12">
   <T as="h2" t={architectureTitle} class="text-text-primary mb-6 text-2xl font-semibold" />
-  <div class="grid gap-8">
+  <div class="flex flex-col gap-10">
     {
-      diagram && (
-        <div>
-          {/* Ver ADR-007: dos SVGs generados por `pnpm diagrams`, alternados por breakpoint */}
+      diagrams.map((d, i) => (
+        <figure class="flex flex-col gap-3">
+          <T as="figcaption" t={d.title} class="text-text-primary text-sm font-semibold" />
+          {/* Ver ADR-007: dos SVGs por diagrama, alternados por breakpoint */}
           <img
-            src={`/diagrams/${slug}-desktop.svg`}
+            src={`/diagrams/${slug}-desktop-${i}.svg`}
             alt={title.es}
             class="hidden w-full rounded-xl md:block"
           />
           <img
-            src={`/diagrams/${slug}-mobile.svg`}
+            src={`/diagrams/${slug}-mobile-${i}.svg`}
             alt={title.es}
             class="w-full rounded-xl md:hidden"
           />
-        </div>
-      )
+        </figure>
+      ))
     }
     {
       keyDecisions && (

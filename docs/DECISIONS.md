@@ -101,17 +101,19 @@ Este documento es la fuente de verdad para el agente. Ninguna implementación de
 
 ---
 
-## ADR-007 — Diagramas de arquitectura: prebuild local de Mermaid a SVG
+## ADR-007 — Diagramas: prebuild local de Mermaid a SVG, N por proyecto
 
-**Decisión:** Cada proyecto guarda un único string Mermaid en su entrada de colección. Un script local (`pnpm diagrams`, usando `@mermaid-js/mermaid-cli`) genera dos SVGs por proyecto en `public/diagrams/`: `{slug}-desktop.svg` (dirección LR) y `{slug}-mobile.svg` (dirección TB). Los SVGs se commitean.
+**Decisión:** Cada proyecto guarda un array `diagrams` en su entrada de colección, donde cada elemento es `{ title: { es, en }, source: string }` (título bilingüe + string Mermaid). Un script local (`pnpm diagrams`, usando `@mermaid-js/mermaid-cli`) genera dos SVGs por diagrama en `public/diagrams/`: `{slug}-desktop-{N}.svg` (dirección LR) y `{slug}-mobile-{N}.svg` (dirección TB), donde `N` es el índice del diagrama en el array. Los SVGs se commitean.
 
-**Contexto:** Se evaluó renderizar Mermaid en cliente (peso de librería en runtime) y generar en el build de Vercel (mermaid-cli arrastra Puppeteer/Chromium e infla el build por artefactos que solo cambian al editar un diagrama).
+**Contexto:** Se evaluó renderizar Mermaid en cliente (peso de librería en runtime) y generar en el build de Vercel (mermaid-cli arrastra Puppeteer/Chromium e infla el build por artefactos que solo cambian al editar un diagrama). Inicialmente un proyecto tenía un solo diagrama (`diagram: string`); se extendió a un array porque un mismo proyecto puede necesitar varios puntos de vista (arquitectura, dataflow, secuencia) sin tener que inventar un grafo único que mezcle todo.
 
 **Consecuencias:**
 
-- El campo se llama `diagram` en la colección `projects`. El string Mermaid NO incluye dirección; el script inyecta LR o TB según variante. No se duplica el grafo.
-- La UI carga el SVG como imagen y alterna variante por breakpoint (`<picture>` con media query o dos `<img>` con `hidden md:block`).
-- Los SVGs commiteados son artefactos derivados. Regla: si se edita el string Mermaid de un proyecto, se debe correr `pnpm diagrams` antes de commitear.
+- El campo se llama `diagrams` (plural) y es un array de `{ title, source }`. El título es bilingüe porque es texto de UI (ver ADR-002, ADR-003) y se renderiza con `<T />`.
+- El string Mermaid NO incluye dirección para `flowchart`/`graph`; el script la inyecta. Para tipos sin dirección (`sequenceDiagram`, `classDiagram`, `stateDiagram`, `stateDiagram-v2`, `erDiagram`, `gantt`, `pie`, `journey`, `gitGraph`, `requirementDiagram`, `C4Context`), el script los pasa tal cual.
+- La UI carga cada SVG como imagen y alterna variante por breakpoint (dos `<img>` con `hidden md:block`/`md:hidden`). Los diagramas se apilan en vertical con su subtítulo arriba — la pila permite ver arquitectura y dataflow en la misma página sin sacrificar el mobile.
+- Los SVGs commiteados son artefactos derivados. Regla: si se edita el campo `diagrams` de un proyecto, se debe correr `pnpm diagrams` antes de commitear.
+- Agregar un diagrama = agregar un elemento al array. El script detecta el nuevo índice y genera los SVGs correspondientes. El componente `ProjectDiagrams` itera el array sin cambios.
 
 ---
 

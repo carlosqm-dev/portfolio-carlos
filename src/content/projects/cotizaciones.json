@@ -56,7 +56,22 @@
       }
     }
   ],
-  "diagram": "A[\"UI: pages / components\"] --> B[\"services<br/>(cotizaciones, productos,<br/>servicios, plantillas)\"]\n    B --> C[\"Supabase<br/>Postgres + RLS\"]\n    B --> D[\"wordExportService\"]\n    D --> E[\"Documento Word<br/>(cotización exportada)\"]\n    A --> F[\"AuthContext\"]\n    F --> G[\"Supabase Auth<br/>(sesión + correos)\"]",
+  "diagrams": [
+    {
+      "title": {
+        "es": "Arquitectura del sistema",
+        "en": "System architecture"
+      },
+      "source": "A[\"UI: pages / components\"] --> B[\"services<br/>(cotizaciones, productos,<br/>servicios, plantillas)\"]\n    B --> C[\"Supabase<br/>Postgres + RLS\"]\n    B --> D[\"wordExportService\"]\n    D --> E[\"Documento Word<br/>(cotización exportada)\"]\n    A --> F[\"AuthContext\"]\n    F --> G[\"Supabase Auth<br/>(sesión + correos)\"]"
+    },
+    {
+      "title": {
+        "es": "Flujo: login y creación de cotización",
+        "en": "Flow: login and quote creation"
+      },
+      "source": "sequenceDiagram\n    actor Usuario\n    participant Login\n    participant AuthContext\n    participant NuevaCotizacion\n    participant Service as cotizacionesService\n    participant Store as demoStore\n\n    Usuario->>Login: Ingresa credenciales demo\n    Login->>AuthContext: login(email, password)\n    AuthContext-->>Login: Compara contra usuario demo fijo\n    AuthContext->>AuthContext: Guarda sesión en localStorage\n    Login-->>Usuario: Redirige al listado de cotizaciones\n\n    Usuario->>NuevaCotizacion: Completa servicios, productos y descuentos\n    NuevaCotizacion->>Service: crearCotizacion(datos)\n    Service->>Store: push sobre el arreglo en memoria\n    Store-->>Service: Cotización con id y número generados\n    Service-->>NuevaCotizacion: Confirmación\n    NuevaCotizacion-->>Usuario: Redirige al detalle\n\n    Note over Store: Si el usuario recarga la página,<br/>el store se reinicia desde demoData —<br/>la cotización creada desaparece."
+    }
+  ],
   "links": {
     "repo": "https://github.com/carlosqm-dev/gestor-cotizaciones-web",
     "demo": "https://gestor-cotizaciones-web.vercel.app/"

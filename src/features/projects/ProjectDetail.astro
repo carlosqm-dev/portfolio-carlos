@@ -9,7 +9,7 @@ import T from '@/components/ui/T.astro';
 import ProjectHeader from './ProjectHeader.astro';
 import ProjectLinks from './ProjectLinks.astro';
 import ProjectStack from './ProjectStack.astro';
-import ProjectArchitecture from './ProjectArchitecture.astro';
+import ProjectDiagrams from './ProjectDiagrams.astro';
 import ProjectChallenges from './ProjectChallenges.astro';
 import ImageLightbox from './ImageLightbox.astro';
 
@@ -18,7 +18,7 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { title, image, gallery, description, stack, diagram, keyDecisions, challenges, links } =
+const { title, image, gallery, description, stack, diagrams, keyDecisions, challenges, links } =
   entry.data;
 ---
 
@@ -72,11 +72,11 @@ const { title, image, gallery, description, stack, diagram, keyDecisions, challe
   <ProjectStack stackIds={stack} />
 
   {
-    (diagram || keyDecisions) && (
-      <ProjectArchitecture
+    (diagrams || keyDecisions) && (
+      <ProjectDiagrams
         slug={entry.id}
         title={title}
-        diagram={diagram}
+        diagrams={diagrams}
         keyDecisions={keyDecisions}
       />
     )

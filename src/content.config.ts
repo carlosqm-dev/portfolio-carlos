@@ -78,9 +78,19 @@ const projects = defineCollection({
         message: 'id de tecnología no encontrado en src/content/stack/',
       }),
     ),
-    // String Mermaid para el diagrama de arquitectura
-    // Ver ADR-007: NO incluir dirección; el script la inyecta.
-    diagram: z.string().optional(),
+    // Diagramas del proyecto (arquitectura, dataflow, etc.).
+    // Ver ADR-007: cada entrada es { title bilingüe, source Mermaid }.
+    // El string Mermaid NO incluye dirección para flowchart/graph; el script
+    // la inyecta. Otros tipos (sequenceDiagram, classDiagram, etc.) no
+    // usan dirección — el script los pasa tal cual.
+    diagrams: z
+      .array(
+        z.object({
+          title: localized,
+          source: z.string().min(1),
+        }),
+      )
+      .optional(),
     links: z
       .object({
         demo: z.url().optional(),
