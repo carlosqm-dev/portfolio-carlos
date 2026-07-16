@@ -138,8 +138,10 @@ const experience = defineCollection({
 const about = defineCollection({
   loader: glob({ pattern: 'about.json', base: './src/content/about' }),
   schema: z.object({
-    description: localized, // Historia profesional — fold de intro
-    bio: z.array(localized).min(1), // Párrafos de reseña personal
+    // Historia profesional — fold de intro. Array de párrafos bilingües
+    // para poder separarlos visualmente (mismo patrón que `bio`).
+    description: z.array(localized).min(1),
+    bio: z.array(localized).min(1).optional(), // Párrafos de reseña personal
     // El stack del carrusel necesita al menos 3 fotos (activa + laterales)
     photos: z
       .array(

@@ -20,7 +20,13 @@ const { description, photos } = about.data;
 <section class="mt-24 md:mt-32">
   <T as="h2" t={title} class="text-text-primary mb-8 text-3xl font-semibold" />
   <div class="grid items-center gap-12 md:grid-cols-2">
-    <T as="p" t={description} class="text-text-secondary leading-relaxed" />
+    <div class="space-y-4">
+      {
+        description.map((paragraph) => (
+          <T as="p" t={paragraph} class="text-text-secondary leading-relaxed" />
+        ))
+      }
+    </div>
     <PhotoCarousel photos={photos} />
   </div>
 </section>

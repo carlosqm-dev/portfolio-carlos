@@ -124,7 +124,9 @@ async function main() {
             await run(input, join(OUT_DIR, `${slug}-${suffix}-${i}.svg`), { quiet: true });
           }
         }
-        console.log(`✅ ${slug}: ${diagrams.length} diagrama(s) -> desktop-{0..N-1} + mobile-{0..N-1}`);
+        console.log(
+          `✅ ${slug}: ${diagrams.length} diagrama(s) -> desktop-{0..N-1} + mobile-{0..N-1}`,
+        );
       } catch (err) {
         console.error(`❌ ${slug}: error renderizando`);
         console.error(err);

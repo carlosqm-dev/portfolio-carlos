@@ -1,34 +1,46 @@
 {
-  "description": {
-    "es": "PLACEHOLDER — Historia profesional de Carlos: cómo empezó en desarrollo, qué lo llevó a especializarse en Full Stack y qué lo mueve al construir software. Reemplazar con la reseña real.",
-    "en": "PLACEHOLDER — Carlos's professional story: how he got into development, what led him to specialize as a Full Stack developer, and what drives him when building software. Replace with the real story."
-  },
-  "bio": [
+  "description": [
     {
-      "es": "PLACEHOLDER — Primer párrafo personal: quién es Carlos fuera del código, sus intereses o pasiones. Reemplazar con contenido real.",
-      "en": "PLACEHOLDER — First personal paragraph: who Carlos is outside of code, his interests or passions. Replace with real content."
+      "es": "Mi historia con la programación empezó en el colegio, con algo tan simple como una calculadora hecha en Raptor Flowchart, un programa para aprender lógica a través de diagramas de flujo. No lo sabía en ese momento, pero esa fue la primera vez que sentí la magia de construir algo de la nada, y ahí quedé enganchado.",
+      "en": "My story with programming started in school, with something as simple as a calculator made in Raptor Flowchart — a program to learn logic through flowcharts. I didn't know it at the time, but that was the first time I felt the magic of building something out of nothing, and I was hooked."
     },
     {
-      "es": "PLACEHOLDER — Segundo párrafo personal (opcional): otra faceta personal, hobbies o vida cotidiana. Reemplazar o eliminar si no aplica.",
-      "en": "PLACEHOLDER — Second personal paragraph (optional): another personal facet, hobbies, or everyday life. Replace or remove if not needed."
+      "es": "Cuando entré a estudiar desarrollo de software, todo empezó a tener sentido. De repente podía entender qué había detrás de las páginas que visitaba a diario y de los videojuegos a los que le regalaba horas enteras, siempre con la misma pregunta rondándome la cabeza: ¿cómo funciona todo esto por dentro?",
+      "en": "When I started studying software development, everything began to make sense. Suddenly I could understand what was behind the pages I visited every day and the video games I gave entire hours to, always with the same question running through my head: how does all of this work under the hood?"
+    },
+    {
+      "es": "Para mí, programar es como jugar con LEGO: piezas que puedo armar, desarmar y volver a combinar como quiera. Pero cuando encuentro las piezas correctas y las uno de la forma correcta, ahí es cuando aparece algo mucho más grande.",
+      "en": "For me, programming is like playing with LEGO: pieces I can put together, take apart, and recombine however I want. But when I find the right pieces and join them the right way, that's when something much bigger shows up."
     }
   ],
   "photos": [
     {
       "src": "/about/photo-1.jpeg",
-      "alt": { "es": "Foto personal 1", "en": "Personal photo 1" }
+      "alt": {
+        "es": "Foto personal 1",
+        "en": "Personal photo 1"
+      }
     },
     {
       "src": "/about/photo-2.jpeg",
-      "alt": { "es": "Foto personal 2", "en": "Personal photo 2" }
+      "alt": {
+        "es": "Foto personal 2",
+        "en": "Personal photo 2"
+      }
     },
     {
       "src": "/about/photo-3.jpeg",
-      "alt": { "es": "Foto personal 3", "en": "Personal photo 3" }
+      "alt": {
+        "es": "Foto personal 3",
+        "en": "Personal photo 3"
+      }
     },
     {
       "src": "/about/photo-4.jpeg",
-      "alt": { "es": "Foto personal 4", "en": "Personal photo 4" }
+      "alt": {
+        "es": "Foto personal 4",
+        "en": "Personal photo 4"
+      }
     }
   ]
 }

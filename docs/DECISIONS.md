@@ -182,8 +182,8 @@ public/
 **Consecuencias:**
 
 - El nav del header deja de ser 100% anchors same-page: `#stack`, `#proyectos`, `#experiencia` pasan a `/#stack`, `/#proyectos`, `/#experiencia` (home-relative) y `#sobre-mi` pasa a `/sobre-mi` (ruta completa). Ver `src/content/ui/hero.json`.
-- Modelo de contenido de la colección `about` se divide en dos campos: `description` (historia profesional, se muestra en el fold de intro de `/sobre-mi`) y `bio` (array de párrafos de reseña personal, se muestra en `PersonalBio.astro` debajo del fold). El campo `hobbies` se elimina — la reseña personal en prosa lo reemplaza.
-- `features/about/AboutSection.astro` se renombra a `AboutIntro.astro` (pierde `id="sobre-mi"` y `scroll-mt-24`, ya no es un anchor de la home) y se agrega `PersonalBio.astro` como componente nuevo.
+- Modelo de contenido de la colección `about` se divide en dos campos: `description` (array de párrafos de historia profesional, se muestra en el fold de intro de `/sobre-mi`) y `bio` (array de párrafos de reseña personal, opcional, se muestra en `PersonalBio.astro` debajo del fold). El campo `hobbies` se elimina — la reseña personal en prosa lo reemplaza. Tanto `description` como `bio` son arrays (no strings con saltos literales) para que los párrafos se puedan iterar y separar visualmente con `space-y`.
+- `features/about/AboutSection.astro` se renombra a `AboutIntro.astro` (pierde `id="sobre-mi"` y `scroll-mt-24`, ya no es un anchor de la home) y se agrega `PersonalBio.astro` como componente nuevo. `PersonalBio.astro` solo renderiza su `<section>` si `bio` tiene contenido — la reseña personal es opcional.
 - `index.astro` ya no importa ni renderiza el fold de "Sobre mí"; esa responsabilidad vive enteramente en `pages/sobre-mi.astro`.
 - No contradice ADR-010: ese ADR describe el contrato visual del fold de intro (dos columnas), que sigue vigente dentro de la nueva página.
 
